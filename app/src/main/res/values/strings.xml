@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Campoint</string>
+    <string name="input_email">Email</string>
+    <string name="input_pwd">Password</string>
+    <string name="input_pwd_confirm">Password Confirm</string>
+    <string name="input_name">사용할 이름을 적어주세요</string>
+    <string name="login_btn">Login</string>
+    <string name="sign_up_btn">Sign Up</string>
+    <string name="login_find_pwd">비밀번호를 잊으셨나요?</string>
+    <string name="go_to_login">로그인 화면으로</string>
+    <string name="dialog_title">알 림</string>
+    <string name="dialog_ok">OK</string>
+    <string name="email_suc">인증메일 발송이 완료되었습니다. 인증후 사용해 주세요</string>
+    <string name="find_pwd">비밀번호 재설정하기</string>
+    <string name="code_input">code</string>
+    <string name="find_info">가입하셨던 메일을 입력해주세요</string>
+    <string name="find_pwd_info">코드가 발송되었습니다. \n Email에서 코드를 확인 후 입력해 주세요</string>
+    <string name="find_modify_pwd_btn">비밀번호 재설정</string>
+    <string name="find_re_email_btn">코드 재발송</string>
+</resources>
