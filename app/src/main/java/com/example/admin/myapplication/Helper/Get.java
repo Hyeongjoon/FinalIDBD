@@ -1,32 +1,27 @@
 package com.example.admin.myapplication.Helper;
 
-import org.androidannotations.annotations.Background;
-
+import android.util.Log;
 
 import java.io.IOException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by admin on 2016-12-28.
+ * Created by admin on 2017-01-13.
  */
 
-public class Post {
-
+public class Get {
     private static OkHttpClient client = new OkHttpClient();
 
-    public static String post(String url , RequestBody formBody) throws IOException {
+    public static String get(String url ) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
-                .post(formBody)
                 .build();
 
         Response response = client.newCall(request).execute();
-
+        Log.d("msg" , "여긴오냐");
         return response.body().string();
     }
-
 }

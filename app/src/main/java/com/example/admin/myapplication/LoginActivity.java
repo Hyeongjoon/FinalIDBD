@@ -9,13 +9,16 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.example.admin.myapplication.Helper.Get;
 import com.example.admin.myapplication.Helper.MakeDialog;
 import com.example.admin.myapplication.Helper.Post;
+import com.example.admin.myapplication.Helper.TokenInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -42,42 +45,21 @@ public class LoginActivity extends Activity{
     private String login_url = "http://52.78.18.19/login";
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     boolean goMain = true;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+        // your custom code
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+    }
     @AfterViews
     protected void init() {
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                    Log.d("msg", "onAuthStateChanged:signed_in:" + user.getUid());
-                        if(goMain){
-                            goMainActivity();
-                        }else{
-                            goSaveActivity();
-                        }
-                    } else {
-                    // User is signed out
-                    Log.d("msg", "onAuthStateChanged:signed_out");
-                    }
-                }
-            };
-        mAuth.addAuthStateListener(mAuthListener);
-        // your custom code
     }
 
-    @Override
-    public void onStop() {
-            super.onStop();
-            if (mAuthListener != null) {
-                mAuth.removeAuthStateListener(mAuthListener);
-                }
-            // ...
-    }
 
     @ViewById(R.id.login_email)
     EditText emailText;
@@ -142,7 +124,6 @@ public class LoginActivity extends Activity{
             if(result.equals("success")){
                 String mCustomToken = jsonObject.get("content").toString();
                 goMain = jsonObject.getBoolean("goMain");
-                Log.d("msg" , goMain+"");
                 mAuth.signInWithCustomToken(mCustomToken)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                  @Override
@@ -151,11 +132,27 @@ public class LoginActivity extends Activity{
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
+                        if (!task.isSuccessful()){
                             Log.w("msg", "signInWithCustomToken", task.getException());
                                 makeDialog("로그인 실패 잠시후에 시도해주세요");
                             } else {
-                            pDialog.cancel();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            user.getToken(true)
+                                    .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                        public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                            if (task.isSuccessful()) {
+                                                String idToken = task.getResult().getToken();  //id 토큰 알아오는곳
+                                                TokenInfo.setTokenId(idToken);
+                                                if(goMain){
+                                                    goMainActivity();
+                                                } else{
+                                                    goSaveActivity();
+                                                }
+                                            } else {
+                                                makeDialog("로그인 실패 잠시후에 시도해주세요");
+                                            }
+                                        }
+                                    });
                         }
                     }
                 });
@@ -166,8 +163,21 @@ public class LoginActivity extends Activity{
             }
         } catch (IOException e){
             e.printStackTrace();
+            pDialog.cancel();
+            makeDialog("로그인 실패 잠시후에 시도해주세요");
         } catch (JSONException e){
             e.printStackTrace();
+        }
+    }
+
+    @Background
+    protected void getGrInfo(String url){
+        try {
+            Get.get(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+            makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
+            pDialog.cancel();
         }
     }
 
