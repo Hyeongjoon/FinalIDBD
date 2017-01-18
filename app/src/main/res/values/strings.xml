@@ -22,6 +22,11 @@
     <string name="main_sub1_input">코 드 입 력</string>
     <string name="main_sub1_btn">입장하기</string>
     <string name="main_sub1_wrong_code_dialog">올바른 코드를 입력해 주세요</string>
+    <string name="main_sub1_dupli_code">이미 추가된 그룹의 코드입니다.</string>
     <string name="main_sub2_gr_create">+ 새로운 그룹 추가하기</string>
     <string name="main_sub2_gr_create_dialog_title">추가할 그룹의 이름을 설정해주세요</string>
+    <string name="main_sub3_first_menu">고객센터 불편사항</string>
+    <string name="main_sub3_second_menu">서비스 이용 약관</string>
+    <string name="main_sub3_third_menu">비밀번호 변경</string>
+    <string name="main_sub3_fourth_menu">계정 탈퇴</string>
 </resources>

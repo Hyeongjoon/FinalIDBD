@@ -161,8 +161,7 @@ public class MainSub2Fragment extends Fragment {
                     pDialog.cancel();
                     String result = jsonObject.get("result").toString();
                     if(result.equals("success")){
-                        ((MainSub2Adapter)mAdapter).addGroup(jsonObject);
-                        notifyInsert();
+                        InsertGr(jsonObject);
                     } else{
                         makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
                         dialogInterface.cancel();
@@ -196,7 +195,7 @@ public class MainSub2Fragment extends Fragment {
         });
     }
 
-    private void notifyInsert(){
+    public void notifyInsert(){
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -204,6 +203,11 @@ public class MainSub2Fragment extends Fragment {
                 mRecyclerView.scrollToPosition(0);
             }
         });
+    }
+
+    public void InsertGr(JSONObject jsonObject){
+        ((MainSub2Adapter)mAdapter).addGroup(jsonObject);
+        notifyInsert();
     }
 }
 

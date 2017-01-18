@@ -18,6 +18,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -30,7 +32,7 @@ import okio.BufferedSink;
  * Created by admin on 2017-01-12.
  */
 
-// 이거 서버쪽 들어가는것까지 완료했고 get 결과물 json으로 받는거 확인부터하면 될듯
+
 
 @EFragment(R.layout.fragment_content1)
 public class MainSub1Fragment extends Fragment{
@@ -44,6 +46,7 @@ public class MainSub1Fragment extends Fragment{
     @Click(R.id.addCode)
     public void addCodeBtn(){
         String code = codeInput.getText().toString().trim();
+        codeInput.setText("");
         if(code.length()!=5){
             makeDialog(getString(R.string.main_sub1_wrong_code_dialog));
         } else{
@@ -58,8 +61,24 @@ public class MainSub1Fragment extends Fragment{
                 .add("name" , name)
                 .build();
         try {
-            Post.post(addCode + TokenInfo.getTokenId(),formBody);
+                JSONObject result =  new JSONObject(Post.post(addCode + TokenInfo.getTokenId(),formBody));
+                if(result.get("result").equals("true")){
+                    pDialog.cancel();
+                    toRight();
+                    ((MainSub2Fragment)((MainActivity)getActivity()).getFragmentItem(1)).InsertGr(result); //2번에 붙어있는 어뎁터 불러와서 데이터 0번에 삽입
+                        //추가 정상적으로 되고 넘어왔을때
+                } else if(result.get("content").equals("code")){
+                    pDialog.cancel();
+                    makeDialog(getString(R.string.main_sub1_wrong_code_dialog));
+                        //코드가 틀린코드를 입력했을때
+                } else if(result.get("content").equals("duplication")){
+                    pDialog.cancel();
+                    makeDialog(getString(R.string.main_sub1_dupli_code));
+                    //코드가 이미 있을때
+                }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -67,6 +86,11 @@ public class MainSub1Fragment extends Fragment{
     @UiThread
     public void makeDialog(String content){
         MakeDialog.oneBtnDialog(getActivity() , content);
+    }
+
+    @UiThread
+    public void toRight(){
+        ((MainActivity)getActivity()).mViewPager.arrowScroll(View.FOCUS_RIGHT);
     }
 
     @UiThread
@@ -83,8 +107,8 @@ public class MainSub1Fragment extends Fragment{
                         if(gr_title.length()==0){
                             MakeDialog.oneBtnDialog(getActivity() , "1글자 이상 입력해주세요");
                         } else{
-                            addCode(code , gr_title );
                             pDialog = ProgressDialog.show(getActivity(), "그룹 추가중입니다.", "Please wait", true, false);
+                            addCode(code , gr_title );
                         }
                     }
                 })

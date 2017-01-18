@@ -36,18 +36,29 @@
                android:layout_alignParentLeft="true"
                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                android:textAlignment="center"
-               android:text="임시임시"
+               android:text="null"
+               />
+           <ImageView
+               android:id="@+id/main_sub2_gr_btn"
+               android:layout_width="15dp"
+               android:layout_height="15dp"
+               android:src="@drawable/temp_group_btn"
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="@dimen/activity_horizontal_margin"
+               android:layout_alignBottom="@id/main_sub_2_gr_name"
+               android:clickable="true"
                />
            <TextView
                android:id="@+id/main_sub_2_gr_num"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:textAlignment="center"
-               android:layout_alignParentRight="true"
+               android:layout_toLeftOf="@id/main_sub2_gr_btn"
                android:layout_marginRight="@dimen/activity_horizontal_margin"
-               android:text="6"
+               android:text="0"
                android:background="@drawable/border_right"
                />
+
        </RelativeLayout>
 
            <LinearLayout

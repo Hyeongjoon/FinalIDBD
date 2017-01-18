@@ -58,19 +58,30 @@ public class MainActivity extends AppCompatActivity  {
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mViewPager.setCurrentItem(FRAGMENT_PAGE2);
-
+        getSupportActionBar().setElevation(0);
         mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
 
             @Override
             public void onPageSelected(int position) {
-                if(position==FRAGMENT_PAGE1) {
-
+                switch (position){
+                    case FRAGMENT_PAGE1 :{
+                        getSupportActionBar().setSubtitle("");
+                        break;
+                    } case FRAGMENT_PAGE2 :{
+                        getSupportActionBar().setSubtitle("");
+                        break;
+                    } case FRAGMENT_PAGE3 :{
+                        getSupportActionBar().setSubtitle("마이페이지 / 설정");
+                        ((MainSub3Fragment)getFragmentItem(FRAGMENT_PAGE3)).init();
+                        break;
+                    }
                 }
             }
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
                 // TODO Auto-generated method stub
+
             }
 
             @Override
@@ -81,7 +92,9 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-
+    public Fragment getFragmentItem(int position){
+            return pagerAdapter.getItem(position);
+    };
 
 
     // FragmentPageAdater : Fragment로써 각각의 페이지를 어떻게 보여줄지 정의한다.
@@ -92,9 +105,9 @@ public class MainActivity extends AppCompatActivity  {
         public pagerAdapter(FragmentManager fm) {
             super(fm);
         }
-        // 특정 위치에 있는 Fragment를 반환해준다.
 
-        @Override
+
+        @Override               // 특정 위치에 있는 Fragment를 반환해준다.
         public Fragment getItem(int position) {
             switch(position){
                 case 0:{

@@ -4,38 +4,23 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/title_box">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="@dimen/main_app_name_size"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My page/Setting"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/main_app_name_size"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/userInfo"
-        android:background="@drawable/title_box">
+        android:background="@drawable/title_box"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        >
         <Button
             android:text="토스트"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_toast" />
-
+            android:id="@+id/main_sub3_my_schedule_btn" />
         <TextView
             android:id="@+id/main_sub3_user_name"
             android:layout_width="wrap_content"
@@ -51,35 +36,42 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/main_sub3_user_name"
             android:textSize="@dimen/main_app_name_size"/>
-
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="프리지아"
-            android:textSize="50dp"
+            android:text="@string/main_sub3_first_menu"
+            android:textSize="@dimen/main_app_name_size"
             android:background="@drawable/title_box"/>
         <TextView
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="프리지아"
-            android:textSize="50dp"
+            android:text="@string/main_sub3_second_menu"
+            android:textSize="@dimen/main_app_name_size"
             android:background="@drawable/title_box"/>
         <TextView
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="프리지아"
-            android:textSize="50dp"
+            android:text="@string/main_sub3_third_menu"
+            android:textSize="@dimen/main_app_name_size"
             android:background="@drawable/title_box"/>
         <TextView
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="프리지아"
-            android:textSize="50dp"
+            android:text="@string/main_sub3_fourth_menu"
+            android:textSize="@dimen/main_app_name_size"
             android:background="@drawable/title_box"/>
     </LinearLayout>
 </LinearLayout>

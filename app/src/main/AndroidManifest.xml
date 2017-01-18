@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.admin.myapplication">
+    package="com.example.admin.myapplication"
+    android:versionCode="1"
+    android:versionName="1.0"
+    >
     <uses-permission android:name="android.permission.INTERNET" />
 
     <service
@@ -22,6 +25,7 @@
         <activity android:name=".ModifyPwdActivity_"/>
         <activity android:name=".SaveActivity_"/>
         <activity android:name=".MainActivity_"/>
+        <activity android:name=".MyScheduleActivity_"/>
         <activity android:name=".IntroActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

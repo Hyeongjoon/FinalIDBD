@@ -1,11 +1,8 @@
 package com.example.admin.myapplication;
 
-
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -16,14 +13,12 @@ import com.alamkanak.weekview.WeekViewEvent;
 import com.example.admin.myapplication.Helper.FindEventId;
 import com.example.admin.myapplication.Helper.MakeDialog;
 import com.example.admin.myapplication.Helper.Post;
-import com.example.admin.myapplication.Helper.TokenInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
-import org.androidannotations.annotations.AfterExtras;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
@@ -41,24 +36,19 @@ import java.util.List;
 import java.util.Locale;
 
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import okio.BufferedSink;
-
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 /**
- * Created by admin on 2017-01-07.
+ * Created by admin on 2017-01-18.
  */
-
-@EActivity(R.layout.activity_save)
-public class SaveActivity extends AppCompatActivity {
+@EActivity(R.layout.activity_my_schedule)
+public class MyScheduleActivity extends AppCompatActivity{
 
     ProgressDialog pDialog;
     private String save_url = "http://52.78.18.19/sche_save";
     FirebaseUser mUser;
 
-    @ViewById(R.id.save_weekView)
+    @ViewById(R.id.my_schedule_weekview)
     WeekView weekView;
     ArrayList<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
@@ -192,30 +182,45 @@ public class SaveActivity extends AppCompatActivity {
     @Click(R.id.save_btn)
     void go_to_login(){
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            sche_save();
-            dialogInterface.cancel();
-        }};
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                sche_save();
+                dialogInterface.cancel();
+            }};
         makeTwoBtnDialog("확인을 누르시면 시간표가 저장이 됩니다.\n추후 마이페이지에서 새로 설정 가능합니다." , listener);
     }
 
     @Background
     void sche_save(){
-            makePDialog();
-            final FormBody.Builder temp = new FormBody.Builder();
+        makePDialog();
 
-            for(int i = 0 ; i < events.size() ; i++){
-                temp.add(i+"" , ""+events.get(i).getId());
-            }
-            temp.add("size" , events.size()+"");
-            RequestBody formbody = temp.add("token" , TokenInfo.getTokenId()).build();
-            postInActivity(formbody);
+        final FormBody.Builder temp = new FormBody.Builder();
+
+        for(int i = 0 ; i < events.size() ; i++){
+            temp.add(i+"" , ""+events.get(i).getId());
+        }
+        Log.d("msg" , events.size()+"");
+        temp.add("size" , events.size()+"");
+        /*mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        mUser.getToken(true)
+                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if (task.isSuccessful()) {
+                            String idToken = task.getResult().getToken();
+                            RequestBody formbody = temp.add("token" , idToken).build();
+                            postInActivity(formbody);
+                        } else {
+                            makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
+                            pDialog.cancel();
+                        }
+                    }
+                });*/
     }
 
     @Background
     protected void postInActivity(RequestBody formbody) {
-        try {
+      /*  try {
             JSONObject jsonObject = new JSONObject(Post.post(save_url  , formbody));
             String result = jsonObject.get("result").toString();
             if(result.equals("true")){
@@ -230,7 +235,7 @@ public class SaveActivity extends AppCompatActivity {
             e.printStackTrace();
             makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
             pDialog.cancel();
-        }
+        }*/
     }
 
     @UiThread
