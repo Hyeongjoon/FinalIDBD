@@ -194,8 +194,8 @@ public class SaveActivity extends AppCompatActivity {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            sche_save();
             dialogInterface.cancel();
+            sche_save();
         }};
         makeTwoBtnDialog("확인을 누르시면 시간표가 저장이 됩니다.\n추후 마이페이지에서 새로 설정 가능합니다." , listener);
     }
@@ -217,19 +217,19 @@ public class SaveActivity extends AppCompatActivity {
     protected void postInActivity(RequestBody formbody) {
         try {
             JSONObject jsonObject = new JSONObject(Post.post(save_url  , formbody));
+            pDialog.cancel();
             String result = jsonObject.get("result").toString();
             if(result.equals("true")){
                 goMain();
             } else{
                 makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
-                pDialog.cancel();
             }
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+            pDialog.cancel();               //Post받다가 오류나면 여길로 바로오니까 2번적어줘야하겠지
             makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
-            pDialog.cancel();
         }
     }
 
@@ -249,7 +249,6 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     public void goMain(){
-        pDialog.cancel();
         MainActivity_.intent(this).start();
         finish();
 

@@ -71,9 +71,8 @@ public class MainActivity extends AppCompatActivity  {
                         getSupportActionBar().setSubtitle("");
                         break;
                     } case FRAGMENT_PAGE3 :{
-                        getSupportActionBar().setSubtitle("마이페이지 / 설정");
-                        ((MainSub3Fragment)getFragmentItem(FRAGMENT_PAGE3)).init();
-                        break;
+                        getSupportActionBar().setSubtitle("마이페이지 / 설정"); //요기서 select 된상태면 이름 셋팅하라고 이거 넣어놨는데 가로세로 전환될때 오류나서 어캐바꿔야할지 생각할것
+                        break;                                                  //로드가 느리면 이름이랑 이메일 null로 나옴
                     }
                 }
             }

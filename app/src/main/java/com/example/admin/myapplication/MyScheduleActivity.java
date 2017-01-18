@@ -3,6 +3,7 @@ package com.example.admin.myapplication;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -13,6 +14,7 @@ import com.alamkanak.weekview.WeekViewEvent;
 import com.example.admin.myapplication.Helper.FindEventId;
 import com.example.admin.myapplication.Helper.MakeDialog;
 import com.example.admin.myapplication.Helper.Post;
+import com.example.admin.myapplication.Helper.TokenInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,8 +25,10 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.WakeLock;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +42,8 @@ import java.util.Locale;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+
 /**
  * Created by admin on 2017-01-18.
  */
@@ -45,8 +51,11 @@ import okhttp3.RequestBody;
 public class MyScheduleActivity extends AppCompatActivity{
 
     ProgressDialog pDialog;
-    private String save_url = "http://52.78.18.19/sche_save";
+    private String correct_sche_url = "http://52.78.18.19/my_option/sche_save/";
     FirebaseUser mUser;
+
+    @Extra
+    String sche_info;
 
     @ViewById(R.id.my_schedule_weekview)
     WeekView weekView;
@@ -147,12 +156,29 @@ public class MyScheduleActivity extends AppCompatActivity{
         cal.set(Calendar.YEAR , 2017);
         cal.set(Calendar.MONTH , 0);
         cal.set(Calendar.DATE , 9);
+        if(!sche_info.equals("null")){  //시간표 없으면 null로 넘기게 해놓음 아니면 Try Catch문으로 가게되어서 ㅠㅠㅠㅠㅠ
+        try {
+            JSONObject pre_info = new JSONObject(sche_info);
+                for (int i = 0; i < pre_info.length(); i++) {
+                    if (pre_info.getInt("" + i) == 1) {
+                        Calendar start_temp = FindEventId.idToCalender(i);
+                        Calendar end_temp = (Calendar) start_temp.clone();
+                        Log.d("msg" , ""+end_temp);
+                        end_temp.add(Calendar.HOUR, 1);
+                        events.add(new WeekViewEvent(i, "", start_temp, end_temp));
+                    }
+                }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        }
         weekView.setEmptyViewClickListener(new WeekView.EmptyViewClickListener() {
             @Override
             public void onEmptyViewClicked(Calendar time) {
                 Calendar startTime = (Calendar) time.clone();
                 startTime.set(Calendar.MINUTE , 0);
                 startTime.set(Calendar.SECOND , 0);
+                startTime.set(Calendar.MILLISECOND , 0);
                 Calendar endTime = (Calendar) startTime.clone(); //이거 순서 바뀌면 안됨 스타트타임 기준으로 클론한거니까 >.<
                 endTime.add(Calendar.HOUR, 1);
                 // Create a new event.
@@ -179,63 +205,42 @@ public class MyScheduleActivity extends AppCompatActivity{
         makeDialog("수업이 있는 시간대를 클릭하여\n 시간표를 완성해 주세요.");
     }
 
-    @Click(R.id.save_btn)
+    @Click(R.id.my_schedule_save_btn)
     void go_to_login(){
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                sche_save();
                 dialogInterface.cancel();
+                sche_save();
             }};
-        makeTwoBtnDialog("확인을 누르시면 시간표가 저장이 됩니다.\n추후 마이페이지에서 새로 설정 가능합니다." , listener);
+        makeTwoBtnDialog("확인을 누르시면 시간표가 저장이 됩니다." , listener);
     }
 
     @Background
     void sche_save(){
         makePDialog();
-
         final FormBody.Builder temp = new FormBody.Builder();
-
         for(int i = 0 ; i < events.size() ; i++){
             temp.add(i+"" , ""+events.get(i).getId());
         }
-        Log.d("msg" , events.size()+"");
-        temp.add("size" , events.size()+"");
-        /*mUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        mUser.getToken(true)
-                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                    public void onComplete(@NonNull Task<GetTokenResult> task) {
-                        if (task.isSuccessful()) {
-                            String idToken = task.getResult().getToken();
-                            RequestBody formbody = temp.add("token" , idToken).build();
-                            postInActivity(formbody);
-                        } else {
-                            makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
-                            pDialog.cancel();
-                        }
-                    }
-                });*/
-    }
-
-    @Background
-    protected void postInActivity(RequestBody formbody) {
-      /*  try {
-            JSONObject jsonObject = new JSONObject(Post.post(save_url  , formbody));
+        ;
+        RequestBody formbody = temp.add("size" , events.size()+"").build();
+        try {
+            JSONObject jsonObject = new JSONObject(Post.post(correct_sche_url+TokenInfo.getTokenId() , formbody));
+            pDialog.cancel();
             String result = jsonObject.get("result").toString();
-            if(result.equals("true")){
-                goMain();
+            if(result.equals("success")){
+                makeCustomDialog();
             } else{
                 makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
-                pDialog.cancel();
             }
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+            pDialog.cancel();           //Post받다가 오류나면 여길로 바로오니까 2번적어줘야하겠지
             makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
-            pDialog.cancel();
-        }*/
+        }
     }
 
     @UiThread
@@ -254,9 +259,23 @@ public class MyScheduleActivity extends AppCompatActivity{
     }
 
     public void goMain(){
-        pDialog.cancel();
-        MainActivity_.intent(this).start();
-        finish();
+        MainActivity_.intent(this).flags(FLAG_ACTIVITY_CLEAR_TOP).start();
+    }
 
+    @UiThread
+    public void makeCustomDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);     // 여기서 this는 Activity의 this
+        builder.setTitle(R.string.dialog_title)        // 제목 설정
+                .setMessage(R.string.correct_sche_success_dialog)        // 메세지 설정
+                .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener(){
+                    // 확인 버튼 클릭시 설정
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton){
+                        dialog.cancel();
+                        goMain();
+                    }
+                });
+        builder.show();
     }
 }
