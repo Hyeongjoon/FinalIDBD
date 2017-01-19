@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="gr_color1">#E91942</color>
+    <color name="gr_color2">#FF4081</color>
+    <color name="gr_color3">#E919D4</color>
+    <color name="gr_color4">#5319E9</color>
+    <color name="gr_color5">#8900FF</color>
+    <color name="gr_color6">#19E2E9</color>
+    <color name="gr_color7">#01FF9E</color>
+    <color name="gr_color8">#EFFF00</color>
+    <color name="gr_color9">#FFBD13</color>
+    <color name="gr_color10">#BDBDBD</color>
 </resources>

@@ -19,15 +19,16 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:orientation="vertical"
-           android:background="@drawable/border_right"
+
            >
        <RelativeLayout
+           android:id="@+id/main_sub2_item_layout2"
            android:paddingBottom="@dimen/activity_vertical_margin"
            android:paddingTop="@dimen/activity_vertical_margin"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="horizontal"
-           android:background="@drawable/border_right"
+
            >
            <TextView
                android:id="@+id/main_sub_2_gr_name"
@@ -40,8 +41,8 @@
                />
            <ImageView
                android:id="@+id/main_sub2_gr_btn"
-               android:layout_width="15dp"
-               android:layout_height="15dp"
+               android:layout_width="20dp"
+               android:layout_height="20dp"
                android:src="@drawable/temp_group_btn"
                android:layout_alignParentRight="true"
                android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -56,7 +57,14 @@
                android:layout_toLeftOf="@id/main_sub2_gr_btn"
                android:layout_marginRight="@dimen/activity_horizontal_margin"
                android:text="0"
-               android:background="@drawable/border_right"
+
+               />
+           <View
+               android:id="@+id/main_sub2_gr_color"
+               android:layout_width="20dp"
+               android:layout_height="20dp"
+               android:layout_toLeftOf="@id/main_sub_2_gr_num"
+               android:layout_marginRight="@dimen/activity_horizontal_margin"
                />
 
        </RelativeLayout>
@@ -66,13 +74,14 @@
                android:layout_height="wrap_content"
                android:orientation="horizontal">
                <LinearLayout
+                   android:id="@+id/main_sub2_item_layout3"
                    android:paddingBottom="@dimen/main_sub2_item_innerPadding"
                    android:paddingTop="@dimen/main_sub2_item_innerPadding"
                    android:layout_width="0dp"
                    android:layout_weight="1"
                    android:layout_height="wrap_content"
                    android:orientation="vertical"
-                   android:background="@drawable/border_right"
+
                    >
                    <TextView
                        android:layout_gravity="center"
@@ -88,6 +97,7 @@
                     />
                </LinearLayout>
                <LinearLayout
+                   android:id="@+id/main_sub2_item_layout4"
                    android:paddingBottom="@dimen/main_sub2_item_innerPadding"
                    android:paddingTop="@dimen/main_sub2_item_innerPadding"
                    android:layout_width="0dp"
@@ -95,7 +105,7 @@
                    android:layout_height="wrap_content"
                    android:layout_gravity="center"
                    android:orientation="vertical"
-                   android:background="@drawable/border_right"
+
                    >
                    <TextView
                        android:layout_gravity="center"

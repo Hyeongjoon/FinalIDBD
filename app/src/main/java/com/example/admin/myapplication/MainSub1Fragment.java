@@ -105,7 +105,7 @@ public class MainSub1Fragment extends Fragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String gr_title = ((EditText)mView.findViewById(R.id.userInputDialog)).getText().toString().trim();
                         if(gr_title.length()==0){
-                            MakeDialog.oneBtnDialog(getActivity() , "1글자 이상 입력해주세요");
+                            MakeDialog.oneBtnDialog(getActivity() , getString(R.string.wrong_gr_name_input));
                         } else{
                             pDialog = ProgressDialog.show(getActivity(), "그룹 추가중입니다.", "Please wait", true, false);
                             addCode(code , gr_title );

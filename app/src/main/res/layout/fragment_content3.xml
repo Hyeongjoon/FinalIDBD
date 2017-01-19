@@ -17,7 +17,7 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         >
         <Button
-            android:text="토스트"
+            android:text="스케쥴 변경"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/main_sub3_my_schedule_btn" />

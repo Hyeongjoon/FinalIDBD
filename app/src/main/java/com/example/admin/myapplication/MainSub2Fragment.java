@@ -74,7 +74,7 @@ public class MainSub2Fragment extends Fragment {
         mRecyclerView.setHasFixedSize(false);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MainSub2Adapter(new JSONArray());
+        mAdapter = new MainSub2Adapter(new JSONArray() , getActivity());
         mRecyclerView.setAdapter(mAdapter);
         initMain();
         Button btn = (Button)rootView.findViewById(R.id.main_sub2_add_group);
@@ -97,7 +97,7 @@ public class MainSub2Fragment extends Fragment {
                           @Override
                           public void run() {
                               try {
-                                  mAdapter = new MainSub2Adapter(jsonObject.getJSONArray("grInfo"));
+                                  mAdapter = new MainSub2Adapter(jsonObject.getJSONArray("grInfo") , getActivity());
                                   mRecyclerView.swapAdapter(mAdapter , false);
                               } catch (JSONException e) {
                                   e.printStackTrace();
@@ -114,6 +114,7 @@ public class MainSub2Fragment extends Fragment {
               }
           }
         }.start();
+
     }
 
 
@@ -209,6 +210,7 @@ public class MainSub2Fragment extends Fragment {
         ((MainSub2Adapter)mAdapter).addGroup(jsonObject);
         notifyInsert();
     }
+
 }
 
 

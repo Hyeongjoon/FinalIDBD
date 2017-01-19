@@ -45,8 +45,13 @@ public class MainSub3Fragment extends Fragment{
 
     @AfterViews
     public void Init(){
-        userEmail.setText(TokenInfo.getUserEmail());
-        userName.setText(TokenInfo.getUserName());
+        while (true) {
+            if(TokenInfo.getUserEmail()!=null){
+                userEmail.setText(TokenInfo.getUserEmail());
+                userName.setText(TokenInfo.getUserName());
+                break;
+            }
+        }
     }
 
 
@@ -67,7 +72,7 @@ public class MainSub3Fragment extends Fragment{
                 pDialog.cancel();
                 makeDialog("내부 서버 오류입니다 잠시후에 시도해 주세요");
             }
-        } catch (IOException e) {
+        } catch (IOException e){
             makeDialog("내부 서버 오류입니다 잠시후에 시도해 주세요");
             e.printStackTrace();
         } catch (JSONException e){
