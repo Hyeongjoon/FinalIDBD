@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.admin.myapplication.Gr_info_Activity_;
 import com.example.admin.myapplication.Helper.MakeDialog;
 import com.example.admin.myapplication.Helper.Post;
 import com.example.admin.myapplication.Helper.TokenInfo;
@@ -203,6 +204,25 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
     public void onBindViewHolder(final ViewHolder holder, final int position) {  //리스트 아이템에있는 클릭 이벤트 만드는곳
         JSONObject group= mList.get(position);
         holder.setData(group);
+        TextView gr_name = (TextView)holder.linearLayout.findViewById(R.id.main_sub_2_gr_name);
+        gr_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gr_info_Activity_.intent(a).extra("page" , 1).start();
+            }
+        });
+        holder.groupNewFileNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gr_info_Activity_.intent(a).extra("page" , 2).start();
+            }
+        });
+        holder.groupNewChatNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gr_info_Activity_.intent(a).extra("page" , 4).start();
+            }
+        });
         ImageView imageView = (ImageView)holder.linearLayout.findViewById(R.id.main_sub2_gr_btn);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

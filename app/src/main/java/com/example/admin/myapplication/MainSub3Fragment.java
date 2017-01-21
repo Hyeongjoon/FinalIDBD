@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Time;
 
 /**
  * Created by admin on 2017-01-12.
@@ -45,10 +46,14 @@ public class MainSub3Fragment extends Fragment{
 
     @AfterViews
     public void Init(){
+        Long start = System.currentTimeMillis();
         while (true) {
             if(TokenInfo.getUserEmail()!=null){
                 userEmail.setText(TokenInfo.getUserEmail());
                 userName.setText(TokenInfo.getUserName());
+                if(System.currentTimeMillis()-start >1000){
+                    break; //시작시간보다 1초지나면
+                }
                 break;
             }
         }

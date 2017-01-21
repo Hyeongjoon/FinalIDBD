@@ -25,6 +25,7 @@
         <activity android:name=".ModifyPwdActivity_"/>
         <activity android:name=".SaveActivity_"/>
         <activity android:name=".MainActivity_"/>
+        <activity android:name=".Gr_info_Activity_"/>
         <activity android:name=".MyScheduleActivity_"/>
         <activity android:name=".IntroActivity_">
             <intent-filter>
