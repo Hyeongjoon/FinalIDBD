@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.admin.myapplication.Gr_info_Activity_;
+import com.example.admin.myapplication.Helper.DBHelper;
 import com.example.admin.myapplication.Helper.MakeDialog;
 import com.example.admin.myapplication.Helper.Post;
 import com.example.admin.myapplication.Helper.TokenInfo;
@@ -56,6 +57,8 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
     private String change_gr_name_urI = "http://52.78.18.19/gr/changeGrName/";
     private String delete_belong_gr = "http://52.78.18.19/gr/delete/";
     private String change_gr_color_urI = "http://52.78.18.19/gr/change_color/";
+
+    private DBHelper db;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView groupName;
@@ -183,15 +186,19 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
     }
 
     public MainSub2Adapter(JSONArray jsonArrayGroup , Activity a){
+        int[] temp_gr_arr = new int[jsonArrayGroup.length()];
         for(int i =0 ; i<jsonArrayGroup.length() ; i++){
             try {
                 mList.add(jsonArrayGroup.getJSONObject(i));
+                temp_gr_arr[i] = jsonArrayGroup.getJSONObject(i).getInt("gid");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         this.a = a;
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

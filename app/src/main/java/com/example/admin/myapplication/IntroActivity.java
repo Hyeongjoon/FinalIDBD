@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -37,18 +38,19 @@ public class IntroActivity extends Activity {
     @AfterViews
     void goMain(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            user.getToken(true)
-                    .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                        public void onComplete(@NonNull Task<GetTokenResult> task) {
-                            if (task.isSuccessful()) {
-                                String idToken = task.getResult().getToken();  //id 토큰 알아오는곳
-                                TokenInfo.setTokenId(idToken);
-                                    goMainActivity();
-                            } else {
-                                init();
-                                handler.postDelayed(runnable, 1000);
-                            }
+                            if (user != null) {
+                                user.getToken(true)
+                                        .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                            public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                                if (task.isSuccessful()) {
+                                                    String idToken = task.getResult().getToken();  //id 토큰 알아오는곳
+                                                    TokenInfo.setTokenId(idToken);
+                                                    goMainActivity();
+                                                    Log.d("msg" , ""+FirebaseInstanceId.getInstance().getToken());
+                                                } else {
+                                                    init();
+                                                    handler.postDelayed(runnable, 1000);
+                                                }
                         }
                     });
         } else {

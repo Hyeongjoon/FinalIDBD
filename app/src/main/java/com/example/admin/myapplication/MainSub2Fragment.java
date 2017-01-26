@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.example.admin.myapplication.Helper.DBHelper;
 import com.example.admin.myapplication.Helper.Get;
 import com.example.admin.myapplication.Helper.MakeDialog;
 import com.example.admin.myapplication.Helper.Post;
@@ -65,6 +66,7 @@ public class MainSub2Fragment extends Fragment {
             makeInputDialog();
         }
     } ;
+
 
 
     @Override
