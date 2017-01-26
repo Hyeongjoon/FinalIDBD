@@ -33,6 +33,7 @@ import com.example.admin.myapplication.Helper.MakeDialog;
 import com.example.admin.myapplication.Helper.Post;
 import com.example.admin.myapplication.Helper.TokenInfo;
 import com.example.admin.myapplication.R;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 import org.json.JSONArray;
@@ -312,10 +313,12 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
         new Thread(){
             @Override
             public void run(){
-                RequestBody formBody = new FormBody.Builder()
-                        .add("gid" , gid+"")
-                        .build();
                 try {
+                    RequestBody formBody = new FormBody.Builder()
+                        .add("gid" , gid+"")
+                        .add("reg_id", FirebaseInstanceId.getInstance().getToken())
+                        .add("notify_key" , mList.get(position).getString("notify_key"))
+                        .build();
                     JSONObject result = new JSONObject(Post.post(delete_belong_gr+TokenInfo.getTokenId() , formBody));
                     if(result.get("result").equals("success")){
                         deleteGroup(position);

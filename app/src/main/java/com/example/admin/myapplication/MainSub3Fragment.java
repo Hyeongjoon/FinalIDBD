@@ -46,7 +46,7 @@ public class MainSub3Fragment extends Fragment{
 
     @AfterViews
     public void Init(){
-        Long start = System.currentTimeMillis();
+      Long start = System.currentTimeMillis();
         while (true) {
             if(TokenInfo.getUserEmail()!=null){
                 userEmail.setText(TokenInfo.getUserEmail());

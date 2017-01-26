@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.admin.myapplication.Helper.MakeDialog;
 import com.example.admin.myapplication.Helper.Post;
 import com.example.admin.myapplication.Helper.TokenInfo;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
@@ -59,6 +60,7 @@ public class MainSub1Fragment extends Fragment{
         RequestBody formBody = new FormBody.Builder()
                 .add("code" , code)
                 .add("name" , name)
+                .add("reg_id", FirebaseInstanceId.getInstance().getToken())
                 .build();
         try {
                 JSONObject result =  new JSONObject(Post.post(addCode + TokenInfo.getTokenId(),formBody));

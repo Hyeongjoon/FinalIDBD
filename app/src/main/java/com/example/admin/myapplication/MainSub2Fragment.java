@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
@@ -158,6 +159,7 @@ public class MainSub2Fragment extends Fragment {
                 RequestBody formBody = new FormBody.Builder()
                         .add("title" , title)
                         .add("token" , TokenInfo.getTokenId())
+                        .add("reg_id", FirebaseInstanceId.getInstance().getToken())
                         .build();
                 try {
                     JSONObject jsonObject = new JSONObject(Post.post(add_gr_url , formBody));
