@@ -48,11 +48,15 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
     @Extra
     int page;
 
+    @Extra
+    public static Long gid; //extra는 프라이빗 못쓴데 그래서 직접 갔다써야함 ㅠㅠ
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gr_main);
-
         tabLayout = (TabLayout) findViewById(R.id.gr_tablayout);
 
         tabLayout.addTab(tabLayout.newTab().setText("팀원"));

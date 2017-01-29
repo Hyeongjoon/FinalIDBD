@@ -37,17 +37,28 @@ import okhttp3.RequestBody;
 @EFragment(R.layout.gr_layout4)
 public class Gr_fourth_fragment extends Fragment{
 
-    private String temp = "http://52.78.18.19/temp/";
+    private String temp = "http://52.78.18.19/chat?token=";
 
-    @Click(R.id.tempbutton)
-    public void temp(){
-     asd();
+    @ViewById(R.id.text_content)
+    EditText editText;
+
+    @Click(R.id.sned_chat)
+    public void send_chat(){
+        if(editText.getText().toString().trim().length()==0){
+
+        } else{
+            send();
+        }
     }
 
     @Background
-    public void asd(){
+    public void send(){
         try {
-            Get.get(temp);
+            RequestBody formBody = new FormBody.Builder()
+                    .add("text", editText.getText().toString())
+                    .add("gid", Gr_info_Activity.gid+"")
+                    .build();
+            Post.post(temp +TokenInfo.getTokenId(), formBody);
         } catch (IOException e) {
             e.printStackTrace();
         }

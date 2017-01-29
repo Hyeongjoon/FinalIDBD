@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -216,19 +217,20 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
         gr_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gr_info_Activity_.intent(a).extra("page" , 1).start();
+                Gr_info_Activity_.intent(a).extra("page" , 1).extra("gid" , getItemId(position)).start();
             }
         });
         holder.groupNewFileNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gr_info_Activity_.intent(a).extra("page" , 2).start();
+                Gr_info_Activity_.intent(a).extra("page" , 2).extra("gid" , getItemId(position)).start();
             }
         });
         holder.groupNewChatNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gr_info_Activity_.intent(a).extra("page" , 4).start();
+
+                Gr_info_Activity_.intent(a).extra("page" , 4).extra("gid" , getItemId(position)).start();
             }
         });
         ImageView imageView = (ImageView)holder.linearLayout.findViewById(R.id.main_sub2_gr_btn);
