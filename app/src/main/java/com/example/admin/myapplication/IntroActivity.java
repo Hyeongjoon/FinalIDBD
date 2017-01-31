@@ -17,6 +17,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
 
 
 /**
@@ -34,6 +35,8 @@ public class IntroActivity extends Activity {
             finish();
         }
 };
+
+
 
     @AfterViews
     void goMain(){

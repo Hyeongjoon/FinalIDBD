@@ -59,8 +59,9 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
     private String change_gr_name_urI = "http://52.78.18.19/gr/changeGrName/";
     private String delete_belong_gr = "http://52.78.18.19/gr/delete/";
     private String change_gr_color_urI = "http://52.78.18.19/gr/change_color/";
+    private String get_gr_info_uri = "http://52.78.18.19/gr_info?token=";
 
-    private DBHelper db;
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView groupName;
@@ -217,20 +218,22 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
         gr_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gr_info_Activity_.intent(a).extra("page" , 1).extra("gid" , getItemId(position)).start();
+                get_gr_info(1 , getItemId(position));
+                //Gr_info_Activity_.intent(a).extra("page" , 1).extra("gid" , getItemId(position)).start();
             }
         });
         holder.groupNewFileNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gr_info_Activity_.intent(a).extra("page" , 2).extra("gid" , getItemId(position)).start();
+                get_gr_info(2 , getItemId(position));
+                //Gr_info_Activity_.intent(a).extra("page" , 2).extra("gid" , getItemId(position)).start();
             }
         });
         holder.groupNewChatNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Gr_info_Activity_.intent(a).extra("page" , 4).extra("gid" , getItemId(position)).start();
+                get_gr_info(4 , getItemId(position));
+                //Gr_info_Activity_.intent(a).extra("page" , 4).extra("gid" , getItemId(position)).start();
             }
         });
         ImageView imageView = (ImageView)holder.linearLayout.findViewById(R.id.main_sub2_gr_btn);
@@ -434,7 +437,6 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                 MainSub2Adapter.super.notifyItemRemoved(position);
             }
         });
-
     }
 
     public void changeColorData(int color, final int postion){
@@ -467,5 +469,29 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void get_gr_info(final int page , final Long gid){
+        new Thread(){
+            @Override
+            public void run(){
+                RequestBody formBody = new FormBody.Builder()
+                        .add("gid", gid+"")
+                        .build();
+                try {
+                    JSONObject result = new JSONObject(Post.post(get_gr_info_uri+TokenInfo.getTokenId() , formBody));
+                    if(result.getString("result").equals("success")){
+                        Gr_info_Activity_.user_list = result.getJSONArray("user_list");
+                        Gr_info_Activity_.intent(a).extra("page" , page).extra("gid" , gid).extra("master" , result.getInt("gr_master")).start();
+                    } else{
+                        //불러오기 실패했을때 어캐할지 처리하는곳
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }

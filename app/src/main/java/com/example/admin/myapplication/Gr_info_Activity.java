@@ -4,6 +4,7 @@ package com.example.admin.myapplication;
 
 import android.app.ActionBar;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -24,8 +25,9 @@ import com.example.admin.myapplication.Helper.ZoomOutPageTransformer;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
-
-
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 @EActivity
@@ -52,11 +54,29 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
     public static Long gid; //extra는 프라이빗 못쓴데 그래서 직접 갔다써야함 ㅠㅠ
 
 
+    public static JSONArray user_list;
+
+    @Extra
+    public int master;
+
+    public static String master_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gr_main);
+
+        for(int i = 0 ; i < user_list.length() ; i++){
+            try {
+                if(((JSONObject)user_list.get(i)).getInt("uid") == master){
+                    master_name = ((JSONObject)user_list.get(i)).getString("name");
+                    break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         tabLayout = (TabLayout) findViewById(R.id.gr_tablayout);
 
         tabLayout.addTab(tabLayout.newTab().setText("팀원"));
