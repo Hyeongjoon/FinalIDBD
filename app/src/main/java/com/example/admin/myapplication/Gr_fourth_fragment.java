@@ -91,4 +91,10 @@ public class Gr_fourth_fragment extends Fragment{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mDbHelper.close();
+    }
 }

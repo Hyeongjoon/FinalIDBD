@@ -38,7 +38,7 @@ import java.util.Map;
 public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
     DBHelper mDbHelper;
-
+    private String add_new_num = "http://52.78.18.19/chat/add_num";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -63,11 +63,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
 
         if (remoteMessage.getData().size() > 0){
-            Log.d("msg", "Message data payload: " + remoteMessage.getData());
             if(Gr_info_Activity_.gid == null){
+                Log.d("msg" , "여긴 언제오냐");
                 sendPushNotification(remoteMessage); //background일때
                 insertMessage(getApplicationContext() , remoteMessage);
-            } else if(Gr_info_Activity_.gid ==Long.parseLong(remoteMessage.getData().get("gid"))){
+            } else if(Gr_info_Activity_.temp_gid == Long.parseLong(remoteMessage.getData().get("gid"))){
                 try {
                 Log.d("msg" , remoteMessage.getData()+"");
                 insertMessage(getApplicationContext() , remoteMessage);
@@ -87,6 +87,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
                     e.printStackTrace();
                 }
             } else{
+                Log.d("msg" , "여긴 언제오냐2");
                 sendPushNotification(remoteMessage); //딴곳에 있을때
                 insertMessage(getApplicationContext() , remoteMessage);
             }
@@ -116,8 +117,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
         Intent intent = new Intent(this, IntroActivity_.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
@@ -143,4 +143,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         db.insert(DBHelper.CHAT_LIST, null, values);
     }
 
+    private void add_num(RemoteMessage remoteMessage){
+
+    }
 }

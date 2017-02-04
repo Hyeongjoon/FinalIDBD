@@ -42,6 +42,5 @@ public class DBHelper  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT writer , content FROM GR_LIST WHERE gr_id = " + gid , null);
         return cursor;
-
     }
 }

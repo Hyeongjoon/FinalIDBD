@@ -117,9 +117,7 @@ public class MainSub2Fragment extends Fragment {
               }
           }
         }.start();
-
     }
-
 
 
     @UiThread

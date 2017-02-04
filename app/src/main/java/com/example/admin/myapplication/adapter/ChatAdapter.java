@@ -57,7 +57,7 @@ public class ChatAdapter extends RecyclerView.Adapter <ChatAdapter.ViewHolder>  
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView writer;
         public TextView chat_content;
@@ -90,20 +90,6 @@ public class ChatAdapter extends RecyclerView.Adapter <ChatAdapter.ViewHolder>  
     public void onBindViewHolder(ChatAdapter.ViewHolder holder, int position) {
         JSONObject group= mList.get(position);
         holder.setData(group);
-        /*data_cursor.moveToPosition(position);
-        String name = "알수없음";
-        try {
-        for(int i = 0 ; i<Gr_info_Activity_.user_list.length() ; i++){
-                JSONObject jsonObject = Gr_info_Activity_.user_list.getJSONObject(i);
-                if(jsonObject.getInt("uid") == Integer.parseInt(data_cursor.getString(data_cursor.getColumnIndex("writer")))){
-                    name = jsonObject.getString("name");
-                    break;
-                }
-        }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        holder.setData(data_cursor.getString(data_cursor.getColumnIndex("content")) , name);*/
     }
 
 

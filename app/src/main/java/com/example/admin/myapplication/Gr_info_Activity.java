@@ -53,19 +53,22 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
     @Extra
     public static Long gid; //extra는 프라이빗 못쓴데 그래서 직접 갔다써야함 ㅠㅠ
 
+    public static Long temp_gid;
 
     public static JSONArray user_list;
 
     @Extra
-    public int master;
+    public static int master;
 
     public static String master_name;
+
+    @Extra
+    public static String gr_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gr_main);
-
         for(int i = 0 ; i < user_list.length() ; i++){
             try {
                 if(((JSONObject)user_list.get(i)).getInt("uid") == master){
@@ -111,7 +114,6 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
         }
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
 
     }
 
@@ -191,6 +193,17 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
         }
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        temp_gid = null;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        temp_gid = gid;
+    }
 
 }
 
