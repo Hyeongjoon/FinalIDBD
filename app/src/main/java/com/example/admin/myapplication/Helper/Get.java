@@ -21,7 +21,6 @@ public class Get {
                 .build();
 
         Response response = client.newCall(request).execute();
-        Log.d("msg" , "여긴오냐");
         return response.body().string();
     }
 }

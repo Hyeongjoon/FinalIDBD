@@ -104,6 +104,10 @@ public class ChatAdapter extends RecyclerView.Adapter <ChatAdapter.ViewHolder>  
             @Override
             public void run() {
                 ChatAdapter.adapter.notifyItemInserted(ChatAdapter.adapter.getItemCount());
+                RecyclerView recyclerView = (RecyclerView)ChatAdapter.adapter.a.findViewById(R.id.gr_layout4_list);
+                if(recyclerView!=null){
+                    recyclerView.scrollToPosition(mList.size()-1);
+                }
             }
         });
     }

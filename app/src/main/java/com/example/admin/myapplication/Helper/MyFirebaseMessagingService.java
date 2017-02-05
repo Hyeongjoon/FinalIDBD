@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.PowerManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,14 +23,25 @@ import com.example.admin.myapplication.Gr_info_Activity_;
 import com.example.admin.myapplication.IntroActivity_;
 import com.example.admin.myapplication.R;
 import com.example.admin.myapplication.adapter.ChatAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
+import org.androidannotations.annotations.Background;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
+
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
 
 /**
  * Created by admin on 2017-01-28.
@@ -38,7 +50,7 @@ import java.util.Map;
 public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
     DBHelper mDbHelper;
-    private String add_new_num = "http://52.78.18.19/chat/add_num";
+    private String add_new_num = "http://52.78.18.19/chat/add_num/";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -63,10 +75,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
 
         if (remoteMessage.getData().size() > 0){
-            if(Gr_info_Activity_.gid == null){
+            if(Gr_info_Activity_.temp_gid == null){
                 Log.d("msg" , "여긴 언제오냐");
                 sendPushNotification(remoteMessage); //background일때
                 insertMessage(getApplicationContext() , remoteMessage);
+                add_num(TokenInfo.getTokenId() , remoteMessage.getData().get("gid")+"");
             } else if(Gr_info_Activity_.temp_gid == Long.parseLong(remoteMessage.getData().get("gid"))){
                 try {
                 Log.d("msg" , remoteMessage.getData()+"");
@@ -90,6 +103,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
                 Log.d("msg" , "여긴 언제오냐2");
                 sendPushNotification(remoteMessage); //딴곳에 있을때
                 insertMessage(getApplicationContext() , remoteMessage);
+                add_num(TokenInfo.getTokenId() , remoteMessage.getData().get("gid")+"");
             }
         }
 
@@ -143,7 +157,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         db.insert(DBHelper.CHAT_LIST, null, values);
     }
 
-    private void add_num(RemoteMessage remoteMessage){
 
+    private void add_num( String temp , String gid){
+                final RequestBody formBody = new FormBody.Builder().add("gid" , gid).build();
+                String idToken = temp;
+                if(idToken==null) {
+                    idToken = FirebaseInstanceId.getInstance().getToken();
+                }
+                final String finalIdToken = idToken;
+                new Thread(){
+                        @Override
+                        public void run() {
+                            try {
+                                Post.post(add_new_num + finalIdToken, formBody);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
     }
 }

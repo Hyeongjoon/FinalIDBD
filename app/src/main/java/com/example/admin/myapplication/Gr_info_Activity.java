@@ -68,6 +68,7 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        temp_gid = gid;
         setContentView(R.layout.activity_gr_main);
         for(int i = 0 ; i < user_list.length() ; i++){
             try {

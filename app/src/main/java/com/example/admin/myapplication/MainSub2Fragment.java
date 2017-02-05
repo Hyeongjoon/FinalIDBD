@@ -48,7 +48,7 @@ import okhttp3.RequestBody;
  * Created by admin on 2017-01-12.
  */
 
-@EFragment               //EFragment에서 왜 UI Thread라던가 어노테이션 아무것도 안먹는 이유 모르겠음 ㅠㅠㅠㅠㅠㅠ
+@EFragment               //EFragment에서 왜 UI Thread라던가 어노테이션 아무것도 안먹는 이유 모르겠음 ㅠㅠㅠㅠㅠㅠ !!!!!!!!시발 왜안먹는지알아???레이아웃 정해줬냐 ㅄ새끼야.......아오...........
 public class MainSub2Fragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -79,20 +79,23 @@ public class MainSub2Fragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new MainSub2Adapter(new JSONArray() , getActivity());
         mRecyclerView.setAdapter(mAdapter);
-        initMain();
         Button btn = (Button)rootView.findViewById(R.id.main_sub2_add_group);
         btn.setOnClickListener(listener);
         return rootView;
         }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        initMain();
+    }
 
     public void initMain(){                     //이거 더러운거 인정한다 근데 android annotation 먹는거 확인한 후 부터 진짜 손쉽게 바꿀수있음 ㅠㅠㅠㅠㅠㅠㅠㅠㅠ
         new Thread(){
           @Override
           public void run(){
-              get_gr_url = get_gr_url +TokenInfo.getTokenId();
               try {
-                  final JSONObject jsonObject = new JSONObject(Get.get(get_gr_url));
+                  final JSONObject jsonObject = new JSONObject(Get.get(get_gr_url +TokenInfo.getTokenId()));
                   if(jsonObject.getString("result").equals("success")){
                       JSONObject userInfo = (JSONObject)jsonObject.getJSONArray("userInfo").get(0);
                       TokenInfo.setUserInfo(userInfo.getString("email") , userInfo.getString("name"));

@@ -46,6 +46,7 @@ import okhttp3.RequestBody;
 public class Gr_fourth_fragment extends Fragment{
 
     private String send = "http://52.78.18.19/chat?token=";
+    private String resetNum = "http://52.78.18.19/chat/reset_num/";
 
     private DBHelper mDbHelper;
 
@@ -96,5 +97,20 @@ public class Gr_fourth_fragment extends Fragment{
     public void onStop() {
         super.onStop();
         mDbHelper.close();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        resetTalkNum();
+    }
+
+    @Background
+    public void resetTalkNum(){
+        try {
+            Get.get(resetNum+TokenInfo.getTokenId()+"/"+Gr_info_Activity_.gid);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
