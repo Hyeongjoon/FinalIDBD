@@ -99,6 +99,7 @@ public class MainSub2Fragment extends Fragment {
                   if(jsonObject.getString("result").equals("success")){
                       JSONObject userInfo = (JSONObject)jsonObject.getJSONArray("userInfo").get(0);
                       TokenInfo.setUserInfo(userInfo.getString("email") , userInfo.getString("name"));
+                      if(getActivity()!=null){
                       getActivity().runOnUiThread(new Runnable() {
                           @Override
                           public void run() {
@@ -109,7 +110,7 @@ public class MainSub2Fragment extends Fragment {
                                   e.printStackTrace();
                               }
                           }
-                      });
+                      });}
                   }else{
                         //앱 강제종료 넣어야함
                   }

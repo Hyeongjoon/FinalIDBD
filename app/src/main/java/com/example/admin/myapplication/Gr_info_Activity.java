@@ -4,6 +4,7 @@ package com.example.admin.myapplication;
 
 import android.app.ActionBar;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -32,6 +33,8 @@ import org.json.JSONObject;
 
 @EActivity
 public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.OnTabSelectedListener{
+
+    public final static int MY_PERMISSIONS_REQUEST= 1;
 
     private int NUM_PAGES = 4;		// 최대 페이지의 수
 
@@ -204,6 +207,37 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
     public void onStart(){
         super.onStart();
         temp_gid = gid;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        //프레그먼트에서 안불림 엑티비티에서 처리해야함
+        Log.d("msg" , "여긴언제옴??");
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                            Log.d("msg" , "여긴 1");
+                        }
+                    if(grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                        Log.d("msg" , "여긴 2");
+                    }
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
 }
