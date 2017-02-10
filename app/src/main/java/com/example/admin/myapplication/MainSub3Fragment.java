@@ -47,12 +47,13 @@ public class MainSub3Fragment extends Fragment{
     @AfterViews
     public void Init(){
       Long start = System.currentTimeMillis();
-        while (true) {
+        boolean temp = true;
+        while (temp) {
             if(TokenInfo.getUserEmail()!=null){
                 userEmail.setText(TokenInfo.getUserEmail());
                 userName.setText(TokenInfo.getUserName());
                 if(System.currentTimeMillis()-start >1000){
-                    break; //시작시간보다 1초지나면
+                    temp = false;
                 }
                 break;
             }

@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import com.example.admin.myapplication.Helper.AwsS3;
 import com.example.admin.myapplication.Helper.DBHelper;
 import com.example.admin.myapplication.Helper.Get;
 import com.example.admin.myapplication.Helper.MakeDialog;
@@ -98,6 +99,8 @@ public class MainSub2Fragment extends Fragment {
                   final JSONObject jsonObject = new JSONObject(Get.get(get_gr_url +TokenInfo.getTokenId()));
                   if(jsonObject.getString("result").equals("success")){
                       JSONObject userInfo = (JSONObject)jsonObject.getJSONArray("userInfo").get(0);
+                      JSONObject awsS3 = jsonObject.getJSONObject("s3Secret");
+                      AwsS3.setKey(awsS3.getString("AccessKey") , awsS3.getString("Secret"));
                       TokenInfo.setUserInfo(userInfo.getString("email") , userInfo.getString("name"));
                       if(getActivity()!=null){
                       getActivity().runOnUiThread(new Runnable() {

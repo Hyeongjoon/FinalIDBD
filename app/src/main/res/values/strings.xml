@@ -34,4 +34,6 @@
     <string name="main_sub3_fourth_menu">계정 탈퇴</string>
     <string name="correct_sche_success_dialog">스케쥴 수정이 완료되었습니다.</string>
     <string name="wrong_gr_name_input">그룹이름은 1글자 이상으로 해주세요</string>
+    <string name="download_path">/IDBDApp</string>
+    <string name="bucket">sendwitchtracer</string>
 </resources>
