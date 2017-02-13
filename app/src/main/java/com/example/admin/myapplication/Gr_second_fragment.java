@@ -115,6 +115,7 @@ public class Gr_second_fragment extends Fragment{
         if(resultCode == RESULT_OK){
             getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,mImageCaptureUri));
             Log.d("msg" , mImageCaptureUri.getPath());
+            Log.d("msg" , mImageCaptureUri.getPath());
         }
     }
 }
