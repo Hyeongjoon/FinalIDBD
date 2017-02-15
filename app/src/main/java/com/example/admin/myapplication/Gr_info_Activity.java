@@ -212,7 +212,6 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         //프레그먼트에서 안불림 엑티비티에서 처리해야함
-        Log.d("msg" , "여긴언제옴??");
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST: {
                 // If request is cancelled, the result arrays are empty.
