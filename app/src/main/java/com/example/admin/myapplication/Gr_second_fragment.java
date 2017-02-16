@@ -99,7 +99,7 @@ public class Gr_second_fragment extends Fragment{
 
 
     private AmazonS3 s3;
-    private TransferUtility transferUtility;
+
 
     private String upload = "http://52.78.18.19/file/upload/";
     private String getList = "http://52.78.18.19/file/";
@@ -120,7 +120,6 @@ public class Gr_second_fragment extends Fragment{
     public void init(){
         s3 = new AmazonS3Client(new BasicAWSCredentials(AwsS3.getAccesskey() , AwsS3.getSecretkey()));
         s3.setRegion(com.amazonaws.regions.Region.getRegion(Regions.AP_NORTHEAST_2));
-        transferUtility =  new TransferUtility(s3, getContext());
         mRecyclerView = (RecyclerView)getActivity().findViewById(R.id.gr_layout2_list);
         mAdapter = new FileListAdapter(new JSONArray(), getActivity());
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -207,13 +206,28 @@ public class Gr_second_fragment extends Fragment{
                     .add("image" , true+"")
                     .build();
             JSONObject result = new JSONObject(Post.post(upload+TokenInfo.getTokenId(), formBody));
-
+            if(result.getString("result").equals("true")){
+                notifyAddFile(((FileListAdapter)mAdapter).addItem(result.getJSONObject("input")));
+            } else{
+                //result false일때
+            }
         }catch ( JSONException e){
            // Toast.makeText( getActivity() ,"내부 서버 오류 입니다." ,  Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }catch (Exception e){
            // Toast.makeText( getActivity() ,"파일전송중 오류가 생겼습니다." ,  Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }
+    }
+
+    @UiThread
+    public void notifyAddFile(int code){
+        if(code == 1){
+            mAdapter.notifyItemInserted(mAdapter.getItemCount()-1);
+            mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+        } else{
+            mAdapter.notifyItemChanged(mAdapter.getItemCount()-1);
+            mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
         }
     }
 }

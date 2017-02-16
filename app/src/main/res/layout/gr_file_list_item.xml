@@ -21,23 +21,26 @@
         >
         <ImageView
             android:id = "@+id/gr_file_list_first"
-            android:layout_width="wrap_content"
+            android:layout_width="141px"
             android:layout_height="141px"
-            android:layout_weight="1"
             android:src="@drawable/file"
             />
         <ImageView
             android:id = "@+id/gr_file_list_second"
-            android:layout_width="wrap_content"
+            android:layout_width="141px"
             android:layout_height="141px"
-            android:layout_weight="1"
             android:src="@drawable/file"
             />
         <ImageView
             android:id = "@+id/gr_file_list_third"
-            android:layout_width="wrap_content"
+            android:layout_width="141px"
             android:layout_height="141px"
-            android:layout_weight="1"
+            android:src="@drawable/file"
+            />
+        <ImageView
+            android:id = "@+id/gr_file_list_fourth"
+            android:layout_width="141px"
+            android:layout_height="141px"
             android:src="@drawable/file"
             />
     </LinearLayout>

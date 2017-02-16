@@ -64,7 +64,7 @@ public class FileListAdapter extends RecyclerView.Adapter <FileListAdapter.ViewH
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView date;
-        public ImageView[] imageViewArr = new ImageView[3];
+        public ImageView[] imageViewArr = new ImageView[4];
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -72,6 +72,7 @@ public class FileListAdapter extends RecyclerView.Adapter <FileListAdapter.ViewH
             imageViewArr[0] = (ImageView) itemView.findViewById(R.id.gr_file_list_first);
             imageViewArr[1] = (ImageView) itemView.findViewById(R.id.gr_file_list_second);
             imageViewArr[2] =  (ImageView) itemView.findViewById(R.id.gr_file_list_third);
+            imageViewArr[3] =  (ImageView) itemView.findViewById(R.id.gr_file_list_fourth);
         }
 
         public void setData(JSONArray jsonArray){
@@ -81,13 +82,41 @@ public class FileListAdapter extends RecyclerView.Adapter <FileListAdapter.ViewH
                 for(int i = 0 ; i<jsonArray.length() ; i++){
                     JSONObject tempObject = jsonArray.getJSONObject(i);
                     if(tempObject.getInt("image")==1) {
-                        Log.d("msg" , tempObject.getString("location"));
-                        Glide.with(imageViewArr[i].getContext()).load(tempObject.getString("location")).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(imageViewArr[i]);
+                        Glide.with(imageViewArr[i].getContext()).load(tempObject.getString("location")).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.1f).into(imageViewArr[i]);
                     }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+
+    public int addItem(JSONObject jsonObject){
+        try {
+            if(mList.size() ==0){
+                JSONArray insert = new JSONArray();
+                insert.put(jsonObject);
+                mList.add(insert);
+                return 1;
+            } else{
+            JSONArray temp = mList.get(mList.size()-1);
+            JSONArray insert = new JSONArray();
+            insert.put(jsonObject);
+            if(temp.getJSONObject(0).getString("d").equals(jsonObject.getString("d"))){
+                for(int i = 0 ; temp.length()==4? i<3 : i < temp.length();i++){
+                    insert.put(temp.get(i));
+                }
+                mList.set(mList.size()-1 , insert);
+                return 0;
+            } else{
+                mList.add(insert);
+                return 1;
+            }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return -1;
         }
     }
 }
