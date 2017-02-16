@@ -3,14 +3,26 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="gr_color1">#E91942</color>
-    <color name="gr_color2">#FF4081</color>
-    <color name="gr_color3">#E919D4</color>
-    <color name="gr_color4">#5319E9</color>
-    <color name="gr_color5">#8900FF</color>
-    <color name="gr_color6">#19E2E9</color>
-    <color name="gr_color7">#01FF9E</color>
-    <color name="gr_color8">#EFFF00</color>
-    <color name="gr_color9">#FFBD13</color>
-    <color name="gr_color10">#BDBDBD</color>
+    <color name="gr_color1">#1AE91942</color>
+    <color name="gr_color2">#1AFF4081</color>
+    <color name="gr_color3">#1AE919D4</color>
+    <color name="gr_color4">#1A5319E9</color>
+    <color name="gr_color5">#1A8900FF</color>
+    <color name="gr_color6">#1A19E2E9</color>
+    <color name="gr_color7">#1A01FF9E</color>
+    <color name="gr_color8">#1AEFFF00</color>
+    <color name="gr_color9">#1AFFBD13</color>
+    <color name="gr_color10">#1ABDBDBD</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_trans80">#CCFFFFFF</color>
+    <color name="white_trans50">#80FFFFFF</color>
+    <color name="white_trans30">#4DFFFFFF</color>
+    <color name="white_trans20">#33FFFFFF</color>
+    <color name="transparent">#00FF4081</color>
+    <color name="text_black">#000000</color>
+    <color name="high_blue">#004063</color>
+    <color name="low_blue">#A8CECB</color>
+    <color name="week_gray">#A4A4A4</color>
+    <color name="week_black">#585858</color>
+
 </resources>

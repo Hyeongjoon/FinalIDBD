@@ -2,17 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
         <Button
             android:id="@+id/main_sub2_add_group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="@string/main_sub2_gr_create"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:background="@color/high_blue"
             />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/main_sub2_group_list"

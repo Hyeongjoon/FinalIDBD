@@ -98,6 +98,7 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                 groupNewChatNum.setText(group.getString("new_talk_num"));
                 int color = group.getInt("color");
                 int id = R.color.gr_color1;
+
                 switch (color){
                     case 1:{
                         /*Drawable drawable = ContextCompat.getDrawable(linearLayout.getContext() , R.drawable.border_color1);
