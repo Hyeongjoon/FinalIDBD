@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -23,6 +25,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -37,6 +40,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,9 +78,11 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.Semaphore;
@@ -106,6 +112,9 @@ public class Gr_second_fragment extends Fragment{
 
     private Uri mImageCaptureUri;
     private final int CameraRequestCode = 1;
+    private final int TAKE_PHOTO = 2;
+    private final int TAKE_DOC = 3;
+
     private static final String[] CAMERA_PERMISSIONS = {
             permission.CAMERA,
             permission.READ_EXTERNAL_STORAGE,
@@ -187,7 +196,6 @@ public class Gr_second_fragment extends Fragment{
     void onResult(int resultCode, Intent data) {
         if(resultCode == RESULT_OK){
             getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,mImageCaptureUri));
-            Log.d("msg" , mImageCaptureUri.getPath());
             String[] temp = mImageCaptureUri.getPath().split("/");
             String fileName = temp[temp.length-1];
             String fileKey = "file/" + Gr_info_Activity_.gid +"/"+fileName;
@@ -212,10 +220,8 @@ public class Gr_second_fragment extends Fragment{
                 //result false일때
             }
         }catch ( JSONException e){
-           // Toast.makeText( getActivity() ,"내부 서버 오류 입니다." ,  Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }catch (Exception e){
-           // Toast.makeText( getActivity() ,"파일전송중 오류가 생겼습니다." ,  Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -229,6 +235,120 @@ public class Gr_second_fragment extends Fragment{
             mAdapter.notifyItemChanged(mAdapter.getItemCount()-1);
             mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
         }
+    }
+
+    @OnActivityResult(TAKE_PHOTO)
+    void onTakeResult(int resultCode, Intent data) {
+        if(resultCode==RESULT_OK){
+            String filePath = getImagePath(data.getData());
+            if(filePath==null){
+                makeDialog("클라우드 저장소에 있는 이미지는 기기에 다운후에 올려주세요");
+            } else{
+                String[] fileTemp = filePath.split("/");
+                String fileName = fileTemp[fileTemp.length-1];
+                String fileType = fileName.substring(fileName.lastIndexOf("."));
+                Calendar current = Calendar.getInstance();
+                current.get(Calendar.YEAR);
+                String insertTime = ""+current.get(Calendar.YEAR) +current.get(Calendar.MONTH) + current.get(Calendar.DATE) + current.get(Calendar.HOUR_OF_DAY) + current.get(Calendar.MINUTE) + current.get(Calendar.SECOND);
+                String insertName  = insertTime+fileType;
+                String fileKey = "file/" + Gr_info_Activity_.gid +"/"+insertName;
+                PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(filePath));
+                this.upload(por , fileKey);
+            }
+        } else{
+            makeDialog("사진 업로드에 실패하였습니다.");
+        }
+    }
+
+    public String getImagePath(Uri uri){
+        Log.d("msg"  , uri.getPath());
+        Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+        String  path;
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":")+1);
+        cursor.close();
+
+        cursor = getActivity().getContentResolver().query(
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+            cursor.moveToFirst();
+        try {
+            path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        } catch (CursorIndexOutOfBoundsException e){
+            return null;
+        }
+            cursor.close();
+            return path;
+
+    }
+
+    @OnActivityResult(TAKE_DOC)
+    void onDocTakeResult(int resultCode, Intent data){
+        if(resultCode == RESULT_OK){
+            Log.d("msg" , data.getData().getPath());
+            } else{
+            makeDialog("문서 업로드에 실패하였습니다.");
+        }
+    }
+
+
+    @Click(R.id.gr_layout2_upload)
+    public void fileUpload(){
+        final LayoutInflater inflater= getActivity().getLayoutInflater();
+        final View dialogView= inflater.inflate(R.layout.upload_dialog, null);
+        final AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+        Button doc_btn = (Button)dialogView.findViewById(R.id.upload_dialog_doc_btn);
+        Button photo_btn = (Button)dialogView.findViewById(R.id.upload_dialog_photo_btn);
+        Button cancel_btn = (Button)dialogView.findViewById(R.id.upload_dialog_cancel_btn);
+
+        builder.setView(dialogView);
+        final AlertDialog dialog = builder.create();
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        photo_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent , TAKE_PHOTO);
+                //사진 pick
+            }
+        });
+
+        doc_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                String[] mimetypes = {"application/pdf", "application/msword" , "application/vnd.ms-excel" , "application/mspowerpoint" , "application/zip" , "text/plain" , "application/hwp"};
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+                startActivityForResult(intent, TAKE_DOC);
+                //파일탐색기
+            }
+        });
+
+        dialog.setCanceledOnTouchOutside(false);//없어지지 않도록 설정
+        makeUploadDialog(dialog);
+    }
+
+    @UiThread
+    public void makeUploadDialog(AlertDialog dialog){
+        dialog.show();
+    }
+
+    @UiThread
+    public void makeDialog(String content){
+        MakeDialog.oneBtnDialog(getActivity() , content);
     }
 }
 

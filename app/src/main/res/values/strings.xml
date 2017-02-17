@@ -36,4 +36,5 @@
     <string name="wrong_gr_name_input">그룹이름은 1글자 이상으로 해주세요</string>
     <string name="download_path">/IDBDApp</string>
     <string name="bucket">sendwitchtracer</string>
+    <string name="upload_dialog_text">업로드할 파일의 형식을 선택해주세요</string>
 </resources>
