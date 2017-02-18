@@ -3,6 +3,7 @@ package com.example.admin.myapplication;
 import android.*;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
@@ -49,6 +51,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.auth.policy.conditions.BooleanCondition;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
@@ -200,18 +203,18 @@ public class Gr_second_fragment extends Fragment{
             String fileName = temp[temp.length-1];
             String fileKey = "file/" + Gr_info_Activity_.gid +"/"+fileName;
             PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(mImageCaptureUri.getPath()));
-            this.upload(por , fileKey);
+            this.upload(por , fileKey , true);
         }
     }
 
     @Background
-    public void upload(PutObjectRequest por , String fileKey){
+    public void upload(PutObjectRequest por , String fileKey, Boolean image){
         try{
             s3.putObject(por);
             RequestBody formBody = new FormBody.Builder()
                     .add("location", fileKey)
                     .add("gid", Gr_info_Activity.gid+"")
-                    .add("image" , true+"")
+                    .add("image" , image+"")
                     .build();
             JSONObject result = new JSONObject(Post.post(upload+TokenInfo.getTokenId(), formBody));
             if(result.getString("result").equals("true")){
@@ -253,10 +256,10 @@ public class Gr_second_fragment extends Fragment{
                 String insertName  = insertTime+fileType;
                 String fileKey = "file/" + Gr_info_Activity_.gid +"/"+insertName;
                 PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(filePath));
-                this.upload(por , fileKey);
+                this.upload(por , fileKey , true);
             }
         } else{
-            makeDialog("사진 업로드에 실패하였습니다.");
+
         }
     }
 
@@ -286,12 +289,191 @@ public class Gr_second_fragment extends Fragment{
     @OnActivityResult(TAKE_DOC)
     void onDocTakeResult(int resultCode, Intent data){
         if(resultCode == RESULT_OK){
-            Log.d("msg" , data.getData().getPath());
+/*            Calendar current = Calendar.getInstance();
+            current.get(Calendar.YEAR);
+            String insertTime = ""+current.get(Calendar.YEAR) +current.get(Calendar.MONTH) + current.get(Calendar.DATE) + current.get(Calendar.HOUR_OF_DAY) + current.get(Calendar.MINUTE) + current.get(Calendar.SECOND);
+            String fileKey = "file/" + Gr_info_Activity_.gid +"/"+insertTime;
+            Log.d("msg" , "여긴오냐");*/
+
+            Log.d("msg" , data.getData().getAuthority());
+            String filePath = getPath(data.getData());
+            String[] fileTemp = filePath.split("/");
+            String fileName = fileTemp[fileTemp.length-1];
+            String fileType = fileName.substring(fileName.lastIndexOf(".")+1);
+            Calendar current = Calendar.getInstance();
+            current.get(Calendar.YEAR);
+            String insertTime = ""+current.get(Calendar.YEAR) +current.get(Calendar.MONTH) + current.get(Calendar.DATE) + current.get(Calendar.HOUR_OF_DAY) + current.get(Calendar.MINUTE) + current.get(Calendar.SECOND);
+            String insertName  = insertTime+"."+fileType;
+            String fileKey = "file/" + Gr_info_Activity_.gid +"/"+insertName;
+            PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(filePath));
+            if(fileType.equals("bmp") ||fileType.equals("gif") || fileType.equals("jpg") || fileType.equals("png") || fileType.equals("webp") || fileType.equals("jpeg")){
+                this.upload(por , fileKey , true);
+                // 문서선택기로 이미지파일 선택했을때
             } else{
-            makeDialog("문서 업로드에 실패하였습니다.");
+                this.upload(por , fileKey , false);
+            }
+            //PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(data.getData().getPath()));
+            } else{
+
         }
     }
 
+
+    private String getPath(final Uri uri) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // MediaStore (and general)
+                return getForApi19(uri);
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
+
+            // Return the remote address
+            if (isGooglePhotosUri(uri))
+                return uri.getLastPathSegment();
+
+            return getDataColumn(uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
+
+    @RequiresApi(19)
+    private String getForApi19(Uri uri) {
+
+        if (DocumentsContract.isDocumentUri(getActivity(), uri)) {
+
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                if ("primary".equalsIgnoreCase(type)) {
+
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+
+                // TODO handle non-primary volumes
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[] {
+                        split[1]
+                };
+
+                return getDataColumn(contentUri, selection, selectionArgs);
+            }
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
+
+
+            // Return the remote address
+            if (isGooglePhotosUri(uri))
+                return uri.getLastPathSegment();
+
+            return getDataColumn(uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+
+            return uri.getPath();
+        }
+        return null;
+    }
+
+    /**
+     * Get the value of the data column for this Uri. This is useful for
+     * MediaStore Uris, and other file-based ContentProviders.
+     *
+     * @param uri The Uri to query.
+     * @param selection (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @return The value of the _data column, which is typically a file path.
+     */
+    public String getDataColumn(Uri uri, String selection,
+                                String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = getActivity().getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is Google Photos.
+     */
+    public static boolean isGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
 
     @Click(R.id.gr_layout2_upload)
     public void fileUpload(){
@@ -330,8 +512,8 @@ public class Gr_second_fragment extends Fragment{
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("*/*");
-                String[] mimetypes = {"application/pdf", "application/msword" , "application/vnd.ms-excel" , "application/mspowerpoint" , "application/zip" , "text/plain" , "application/hwp"};
-                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+                //String[] mimetypes = {"application/pdf", "application/msword" , "application/vnd.ms-excel" , "application/mspowerpoint" , "application/zip" , "text/plain" , "application/hwp"};
+               // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
                 startActivityForResult(intent, TAKE_DOC);
                 //파일탐색기
             }

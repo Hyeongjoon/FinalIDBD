@@ -1,16 +1,20 @@
 package com.example.admin.myapplication.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.admin.myapplication.File_click_activity;
+import com.example.admin.myapplication.File_click_activity_;
 import com.example.admin.myapplication.Gr_info_Activity_;
 import com.example.admin.myapplication.R;
 
@@ -29,6 +33,7 @@ public class FileListAdapter extends RecyclerView.Adapter <FileListAdapter.ViewH
 
     private List<JSONArray> mList= new ArrayList<>();
     private Activity a;
+
 
     public FileListAdapter(JSONArray jsonArray , Activity a ){
         for(int i =0 ; i<jsonArray.length() ; i++){
@@ -65,10 +70,12 @@ public class FileListAdapter extends RecyclerView.Adapter <FileListAdapter.ViewH
 
         public TextView date;
         public ImageView[] imageViewArr = new ImageView[4];
+        private LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             date = (TextView)itemView.findViewById(R.id.gr_file_list_date);
+            linearLayout = (LinearLayout)itemView.findViewById(R.id.file_list_item_layout);
             imageViewArr[0] = (ImageView) itemView.findViewById(R.id.gr_file_list_first);
             imageViewArr[1] = (ImageView) itemView.findViewById(R.id.gr_file_list_second);
             imageViewArr[2] =  (ImageView) itemView.findViewById(R.id.gr_file_list_third);
@@ -77,8 +84,18 @@ public class FileListAdapter extends RecyclerView.Adapter <FileListAdapter.ViewH
 
         public void setData(JSONArray jsonArray){
             try {
-                JSONObject temp = jsonArray.getJSONObject(0);
+                final JSONObject temp = jsonArray.getJSONObject(0);
                 date.setText(temp.getString("d"));
+                linearLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            File_click_activity_.intent(a).extra("date" , temp.getString("d")).start();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
                 for(int i = 0 ; i<jsonArray.length() ; i++){
                     JSONObject tempObject = jsonArray.getJSONObject(i);
                     if(tempObject.getInt("image")==1) {

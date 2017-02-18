@@ -40,8 +40,15 @@
         <activity android:name=".ModifyPwdActivity_"/>
         <activity android:name=".SaveActivity_"/>
         <activity android:name=".MainActivity_"/>
-        <activity android:name=".Gr_info_Activity_"/>
-        <activity android:name=".MyScheduleActivity_"/>
+        <activity android:name=".Gr_info_Activity_"
+            android:parentActivityName=".MainActivity_"
+            />
+        <activity android:name=".MyScheduleActivity_"
+            android:parentActivityName=".MainActivity_"
+            />
+        <activity android:name=".File_click_activity_"
+            android:parentActivityName=".Gr_info_Activity_"
+            />
         <activity android:name=".IntroActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
