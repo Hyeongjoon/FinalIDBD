@@ -81,4 +81,12 @@ public class File_click_activity extends AppCompatActivity{
     public void makeDialog(String contents){
         MakeDialog.oneBtnDialog(this , contents);
     }
+
+    @UiThread
+    public void deleteFile(int fid){
+        if(pagerAdapter.deleteItem(fid)){
+            Log.d("msg" , fid+"");
+            pagerAdapter.notifyDataSetChanged();
+        };
+    }
 }

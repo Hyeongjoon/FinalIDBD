@@ -4,12 +4,14 @@ import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +21,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.admin.myapplication.Helper.AwsS3;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,6 +53,8 @@ public class Gr_file_list_fragment extends Fragment {
     private int uid;
     private int image;
 
+    private AmazonS3 s3;
+
     private DownloadManager mDownloadManager; //다운로드 매니저.
     private long mDownloadQueueId; //다운로드 큐 아이디..
 
@@ -54,7 +66,7 @@ public class Gr_file_list_fragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
-
+                Toast.makeText(context, "DownLoad Complete.", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -96,6 +108,8 @@ public class Gr_file_list_fragment extends Fragment {
         fid = getArguments().getInt("fid");
         uid = getArguments().getInt("uid");
         image = getArguments().getInt("image");
+        s3 = new AmazonS3Client(new BasicAWSCredentials(AwsS3.getAccesskey() , AwsS3.getSecretkey()));
+        s3.setRegion(com.amazonaws.regions.Region.getRegion(Regions.AP_NORTHEAST_2));
     }
 
     @Override
@@ -116,6 +130,7 @@ public class Gr_file_list_fragment extends Fragment {
             e.printStackTrace();
         }
 
+        //다운로드 버튼 셋팅
         ImageView downBtn= (ImageView)rootView.findViewById(R.id.file_down_image);
         downBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +138,17 @@ public class Gr_file_list_fragment extends Fragment {
                 download(location);
             }
         });
+
+
+        //정보보기 버튼
+        ImageView dialogBtn = (ImageView)rootView.findViewById(R.id.file_dialog_image);
+        dialogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeDialog(fid , uid);
+            }
+        });
+
 
         if(image==1){
             ImageView imageView = (ImageView)rootView.findViewById(R.id.file_image_view);
@@ -133,6 +159,49 @@ public class Gr_file_list_fragment extends Fragment {
         }
         return rootView;
     }
+
+    @UiThread
+    public void makeDialog(final int fid , int uid){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(fileName);
+        if(Integer.parseInt(FirebaseAuth.getInstance().getCurrentUser().getUid())==uid){
+         builder.setItems(R.array.file_click_my_file, new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+               if(which == 0){
+                    //정보 넣는 다이아로그 띄울것
+               } else{
+                    dialog.cancel();
+                    AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getActivity());
+                    deleteDialog.setTitle("정말로 삭제하시겠습니까?");
+                    deleteDialog.setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ((File_click_activity_)getActivity()).deleteFile(fid);
+                        }
+                    });
+                   deleteDialog.setNegativeButton(R.string.dialog_cancle, new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           dialog.cancel();
+                       }
+                   });
+                   deleteDialog.show();
+               }
+             }
+         });
+        } else{
+            builder.setItems(R.array.file_click_not_my_file, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //정보 넣는 다이아로그 띄울것
+                }
+            });
+        }
+        builder.show();
+    }
+
+
 
     @Override
     public void onPause() {

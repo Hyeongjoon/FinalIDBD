@@ -477,6 +477,22 @@ public class Gr_second_fragment extends Fragment{
 
     @Click(R.id.gr_layout2_upload)
     public void fileUpload(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            makeUploadDialog();
+        } else{
+            if(ContextCompat.checkSelfPermission(getActivity() , permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(getActivity() , permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                    ||ContextCompat.checkSelfPermission(getActivity() , permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(getActivity(), CAMERA_PERMISSIONS , Gr_info_Activity_.MY_PERMISSIONS_REQUEST);
+            } else{
+                makeUploadDialog();
+            }
+        }
+
+    }
+
+    @UiThread
+    public void makeUploadDialog(){
         final LayoutInflater inflater= getActivity().getLayoutInflater();
         final View dialogView= inflater.inflate(R.layout.upload_dialog, null);
         final AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
@@ -513,18 +529,13 @@ public class Gr_second_fragment extends Fragment{
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("*/*");
                 //String[] mimetypes = {"application/pdf", "application/msword" , "application/vnd.ms-excel" , "application/mspowerpoint" , "application/zip" , "text/plain" , "application/hwp"};
-               // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
+                // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes);
                 startActivityForResult(intent, TAKE_DOC);
                 //파일탐색기
             }
         });
 
         dialog.setCanceledOnTouchOutside(false);//없어지지 않도록 설정
-        makeUploadDialog(dialog);
-    }
-
-    @UiThread
-    public void makeUploadDialog(AlertDialog dialog){
         dialog.show();
     }
 

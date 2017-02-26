@@ -244,8 +244,8 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                 AlertDialog.Builder ab = new AlertDialog.Builder(c);
                 ab.setTitle(holder.groupName.getText());
                 ab.setItems(R.array.main_sub2_gr_btn_click, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
                         switch (which) {
                             case 0 : {
                                 final AlertDialog.Builder wrongGroupName = new AlertDialog.Builder(a);

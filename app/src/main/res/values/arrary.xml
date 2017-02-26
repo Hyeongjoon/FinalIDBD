@@ -17,4 +17,11 @@
         <item><font fgcolor="#FFBD13">i</font></item>
         <item><font fgcolor="#BDBDBD">j</font></item>
     </string-array>
+    <string-array name="file_click_my_file">
+        <item>파일 정보 보기</item>
+        <item>파일 삭제 하기</item>
+    </string-array>
+    <string-array name="file_click_not_my_file">
+        <item>파일 정보 보기</item>
+    </string-array>
 </resources>
