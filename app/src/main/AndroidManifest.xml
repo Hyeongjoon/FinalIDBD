@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.admin.myapplication"
-    android:versionCode="1"
-    android:versionName="1.0"
+    package="com.idbd.admin.myapplication"
+    android:versionCode="2"
+    android:versionName="1.1"
     android:minSdkVersion="8"
     >
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,16 +16,7 @@
     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
     <uses-feature android:name="android.hardware.camera.front" android:required="false" />
 
-    <service
-        android:name=".MyFirebaseInstanceIDService">
-        <intent-filter>
-            <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-        </intent-filter>
-    </service>
 
-    <service
-        android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
-        android:enabled="true" />
 
     <application
         android:allowBackup="true"
@@ -33,34 +24,43 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity_"/>
-        <activity android:name=".SignUpActivity_"/>
-        <activity android:name=".EmailSucActivity_"/>
-        <activity android:name=".FindEmailActivity_"/>
-        <activity android:name=".ModifyPwdActivity_"/>
-        <activity android:name=".SaveActivity_"/>
-        <activity android:name=".MainActivity_"/>
-        <activity android:name=".Gr_info_Activity_"
-            android:parentActivityName=".MainActivity_"
+        <activity android:name="com.idbd.admin.myapplication.LoginActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.SignUpActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.EmailSucActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.FindEmailActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.ModifyPwdActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.SaveActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.MainActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.Gr_info_Activity_"
+            android:parentActivityName="com.idbd.admin.myapplication.MainActivity_"
             />
-        <activity android:name=".MyScheduleActivity_"
-            android:parentActivityName=".MainActivity_"
+        <activity android:name="com.idbd.admin.myapplication.MyScheduleActivity_"
+            android:parentActivityName="com.idbd.admin.myapplication.MainActivity_"
             />
-        <activity android:name=".File_click_activity_"
-            android:parentActivityName=".Gr_info_Activity_"
+        <activity android:name="com.idbd.admin.myapplication.File_click_activity_"
+            android:parentActivityName="com.idbd.admin.myapplication.Gr_info_Activity_"
             />
-        <activity android:name=".IntroActivity_">
+        <activity android:name="com.idbd.admin.myapplication.IntroActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <service
-            android:name=".Helper.MyFirebaseMessagingService">
+            android:name="com.idbd.admin.myapplication.Helper.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
+        <service
+            android:name="com.idbd.admin.myapplication.Helper.TokenInfo" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
     </application>
 
 </manifest>
