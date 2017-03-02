@@ -473,7 +473,7 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                     JSONObject result = new JSONObject(Post.post(get_gr_info_uri+TokenInfo.getTokenId() , formBody));
                     if(result.getString("result").equals("success")){
                         Gr_info_Activity_.user_list = result.getJSONArray("user_list");
-                        Gr_info_Activity_.intent(a).extra("page" , page).extra("gid" , gid).extra("master" , result.getInt("gr_master")).extra("gr_code" , result.getString("gr_code")).start();
+                        Gr_info_Activity_.intent(a).extra("page" , page).extra("gid" , gid).extra("master" , result.getInt("gr_master")).extra("gr_code" , result.getString("gr_code")).extra("gr_sche" , result.getString("gr_sche")).start();
                     } else{
                         //불러오기 실패했을때 어캐할지 처리하는곳
                     }

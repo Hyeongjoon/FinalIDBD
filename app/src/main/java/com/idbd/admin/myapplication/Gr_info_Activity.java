@@ -50,6 +50,9 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
     @Extra
     public static Long gid; //extra는 프라이빗 못쓴데 그래서 직접 갔다써야함 ㅠㅠ
 
+    @Extra
+    public static String gr_sche;
+
     public static Long temp_gid;
 
     public static JSONArray user_list;

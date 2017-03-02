@@ -18,6 +18,9 @@ import com.idbd.admin.myapplication.Helper.FindEventId;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,9 +41,6 @@ public class Gr_third_fragment extends Fragment{
     WeekView weekView;
     ArrayList<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
-    private float preY;
-    private float preX;
-    private static final int OFF_SET = 10;
     FirebaseUser mUser;
 
     MonthLoader.MonthChangeListener mMonthChangeListener = new MonthLoader.MonthChangeListener() {
@@ -137,26 +137,25 @@ public class Gr_third_fragment extends Fragment{
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR , 2017);
         cal.set(Calendar.MONTH , 0);
-        cal.set(Calendar.DATE , 11);
-        /*weekView.setEmptyViewClickListener(new WeekView.EmptyViewClickListener() {
-            @Override
-            public void onEmptyViewClicked(Calendar time) {
-                Calendar startTime = (Calendar) time.clone();
-                startTime.set(Calendar.MINUTE , 0);
-                startTime.set(Calendar.SECOND , 0);
-                Calendar endTime = (Calendar) startTime.clone(); //이거 순서 바뀌면 안됨 스타트타임 기준으로 클론한거니까 >.<
-                endTime.add(Calendar.HOUR, 1);
-                // Create a new event.
-                WeekViewEvent event = new WeekViewEvent(FindEventId.find(startTime), "", startTime, endTime);
-                if(events.contains(event)){
-                    events.remove(event);
-                } else{
-                    events.add(event);
+        cal.set(Calendar.DATE , 20);
+        if(!Gr_info_Activity.gr_sche.equals("null")){  //시간표 없으면 null로 넘기게 해놓음 아니면 Try Catch문으로 가게되어서 ㅠㅠㅠㅠㅠ
+            try {
+                JSONArray jsonArray = new JSONArray(Gr_info_Activity.gr_sche);
+                for(int j = 0 ; j < jsonArray.length() ; j++){
+                    JSONObject pre_info = jsonArray.getJSONObject(j);
+                    for (int i = 0; i < pre_info.length()-1; i++) { //jsonObject 길이는 jsonObject에 포함 된 uid 땜에 1개 빼야됨
+                        if (pre_info.getInt("" + i) == 1) {
+                            Calendar start_temp = FindEventId.idToCalender(i);
+                            Calendar end_temp = (Calendar) start_temp.clone();
+                            end_temp.add(Calendar.HOUR, 1);
+                            events.add(new WeekViewEvent(i, "", start_temp, end_temp));
+                        }
+                    }
                 }
-                // Refresh the week view. onMonthChange will be called again.
-                weekView.notifyDatasetChanged();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });        요거는 테이블 선택했을 때 클릭 리스너 붙이는 함수 혹시몰라서 주석처리 해 놓음*/
+        }
         weekView.goToDate(cal);
         int height = weekView.getHeight();
         int padding = weekView.getHeaderRowPadding();
@@ -184,8 +183,7 @@ public class Gr_third_fragment extends Fragment{
         weekView.setMonthChangeListener(mMonthChangeListener);
         initWeekView();
         setupDateTimeInterpreter(false);
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
-
+        weekView.notifyDatasetChanged();
     }
 
 }
