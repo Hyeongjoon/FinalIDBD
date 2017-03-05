@@ -137,7 +137,7 @@ public class Gr_third_fragment extends Fragment{
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR , 2017);
         cal.set(Calendar.MONTH , 0);
-        cal.set(Calendar.DATE , 20);
+        cal.set(Calendar.DATE , 15);
         if(!Gr_info_Activity.gr_sche.equals("null")){  //시간표 없으면 null로 넘기게 해놓음 아니면 Try Catch문으로 가게되어서 ㅠㅠㅠㅠㅠ
             try {
                 JSONArray jsonArray = new JSONArray(Gr_info_Activity.gr_sche);

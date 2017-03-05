@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -267,7 +268,7 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                                         if (groupName.length() == 0) {
                                             wrongGroupName.show();
                                         } else {
-                                            changeName(groupName, getItemId(position) , position);
+                                            changeName(groupName, getItemId(holder.getAdapterPosition()) , holder.getAdapterPosition());
                                         }
                                     }
                                 });
@@ -281,7 +282,7 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                                 change.setItems(R.array.main_sub2_gr_color_pick_list, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int color) {
-                                        changeColor(getItemId(position) , position , color+1);
+                                        changeColor(getItemId(holder.getAdapterPosition()) , holder.getAdapterPosition() , color+1);
                                     }
                                 });
                                 AlertDialog mDialog = change.create();
@@ -291,7 +292,7 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                                 DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        deleteBelong(getItemId(position) , position);
+                                        deleteBelong(getItemId(position) , holder.getAdapterPosition());
                                     }
                                 };
                                 MakeDialog.twoBtn(a, a.getString(R.string.main_sub2_gr_delete_confirm) , listener);
