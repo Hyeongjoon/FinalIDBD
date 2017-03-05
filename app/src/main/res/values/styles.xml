@@ -1,7 +1,7 @@
 <resources>
-
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/MyActionBar</item>
+
     </style>
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
@@ -10,7 +10,6 @@
         <item name="android:subtitleTextStyle">@style/MySubTitleText</item>
         <!-- Support library compatibility -->
         <item name="subtitleTextStyle">@style/MySubTitleText</item>
-
     </style>
 
     <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -24,6 +23,5 @@
     <style name="MyMenuText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
-
 
 </resources>
