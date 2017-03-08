@@ -14,6 +14,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -138,7 +139,7 @@ public class Gr_second_fragment extends Fragment{
                     ||ContextCompat.checkSelfPermission(getActivity() , permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(getActivity(), CAMERA_PERMISSIONS , Gr_info_Activity_.MY_PERMISSIONS_REQUEST);
             } else{
-                String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/IDBD";
+                String dirPath = Environment.getExternalStorageDirectory() + "/IDBD";
                 File dir_tracer = new File(dirPath);
                 if(!dir_tracer.exists()){
                     dir_tracer.mkdir();
@@ -146,10 +147,23 @@ public class Gr_second_fragment extends Fragment{
                 Date d = new Date(System.currentTimeMillis());
                 DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
                 String filePath = dirPath +"/" + df.format(d) +".jpg";
-                File image = new File(filePath);
-                mImageCaptureUri = Uri.fromFile(image);
+                String fileName = df.format(d) +".jpg";
+                File image = new File(new File(Environment.getExternalStorageDirectory(), "IDBD"), fileName);
+                //File image = new File(filePath);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Log.d("msg" , image.getPath());
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    mImageCaptureUri =  FileProvider.getUriForFile(
+                            getContext(),
+                            getContext().getPackageName() + ".provider", image);
+                    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    Log.d("msg" , mImageCaptureUri.toString());
+                } else{
+                    mImageCaptureUri =  Uri.fromFile(image);
+                }
+
                 intent.putExtra(MediaStore.EXTRA_OUTPUT , mImageCaptureUri);
+
                 startActivityForResult(intent , CameraRequestCode);
             }
         }
@@ -158,10 +172,12 @@ public class Gr_second_fragment extends Fragment{
     @OnActivityResult(CameraRequestCode)
     void onResult(int resultCode, Intent data) {
         if(resultCode == RESULT_OK){
+            //
             getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,mImageCaptureUri));
             String[] temp = mImageCaptureUri.getPath().split("/");
             String fileName = temp[temp.length-1];
             String fileKey = "file/" + Gr_info_Activity_.gid +"/"+fileName;
+
             PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(mImageCaptureUri.getPath()));
             this.upload(por , fileKey , true);
         }
