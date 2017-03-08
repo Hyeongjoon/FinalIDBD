@@ -278,7 +278,7 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                                 return;
                             }case 1 :{
                                 AlertDialog.Builder change = new AlertDialog.Builder(c);
-                                change.setTitle(c.getString(R.string.main_sub2_gr_name_change_dialog_title));
+                                change.setTitle(c.getString(R.string.main_sub2_color_change_tilte));
                                 change.setItems(R.array.main_sub2_gr_color_pick_list, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int color) {
