@@ -2,31 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gr_layout2_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:layout_weight="1"
+        android:background="@color/white"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="24dp"
+        android:background="@color/white"
         >
         <Button
             android:id="@+id/gr_layout2_upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="업로드"
-            android:layout_weight="1"/>
+            android:text="코드보기"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/upload_button1"
+            android:layout_marginRight="5dp"/>
         <Button
             android:id="@+id/gr_layout2_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="카메라"
+            android:text="공유하기"
+            android:textSize="15dp"
+            android:textColor="@color/high_blue"
             android:layout_weight="1"
+            android:background="@drawable/upload_button2"
+            android:layout_marginLeft="5dp"
             />
     </LinearLayout>
+
+
 </LinearLayout>

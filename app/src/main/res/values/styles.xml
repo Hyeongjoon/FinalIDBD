@@ -6,7 +6,7 @@
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="titleTextStyle">@style/MyTitleTextStyle</item>
-        <item name="background">@color/white</item>
+        <item name="background">@color/high_blue</item>
         <item name="android:subtitleTextStyle">@style/MySubTitleText</item>
         <!-- Support library compatibility -->
         <item name="subtitleTextStyle">@style/MySubTitleText</item>
