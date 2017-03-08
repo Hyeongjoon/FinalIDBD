@@ -9,16 +9,14 @@
        xmlns:card_view="http://schemas.android.com/apk/res-auto"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_gravity="center"
-       card_view:cardCornerRadius="4dp">
+       android:layout_gravity="center">
        <LinearLayout
            android:id="@+id/main_sub2_item_layout"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:orientation="vertical"
            android:layout_marginLeft="20dp"
-           android:layout_marginRight="20dp"
-           >
+           android:layout_marginRight="20dp">
            <RelativeLayout
                android:id="@+id/main_sub2_item_layout2"
                android:layout_width="match_parent"
@@ -28,15 +26,18 @@
                android:gravity="center"
                >
                <View
-               android:id="@+id/main_sub2_gr_color"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"/>
+                   android:id="@+id/main_sub2_gr_color"
+                   android:layout_width="match_parent"
+                   android:layout_height="7dp"
+                   android:layout_alignParentBottom="true"/>
+
 
                <TextView
                    android:id="@+id/main_sub_2_gr_name"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_alignParentLeft="true"
+                   android:layout_alignParentBottom="true"
                    android:layout_marginLeft="30dp"
                    android:layout_marginTop="20dp"
                    android:maxLength="10"
@@ -53,7 +54,8 @@
                    android:layout_alignParentRight="true"
                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                    android:layout_marginTop="15dp"
-                   android:clickable="true"/>
+                   android:clickable="true"
+                   android:layout_alignParentBottom="true"/>
                <TextView
                    android:id="@+id/main_sub_2_gr_num"
                    android:layout_width="wrap_content"
@@ -62,7 +64,8 @@
                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                    android:text="0"
                    android:layout_marginTop="20dp"
-                   android:textColor="@color/text_black"/>
+                   android:textColor="@color/text_black"
+                   android:layout_alignParentBottom="true"/>
            </RelativeLayout>
 
            <LinearLayout
@@ -75,6 +78,7 @@
                    android:layout_weight="1"
                    android:layout_height="115dp"
                    android:orientation="vertical"
+                   android:background="@drawable/itembox_left"
                    >
                    <TextView
                        android:layout_gravity="center"
@@ -99,6 +103,7 @@
                    android:layout_height="115dp"
                    android:layout_gravity="center"
                    android:orientation="vertical"
+                   android:background="@drawable/itembox_right"
                    >
                    <TextView
                        android:layout_gravity="center"
