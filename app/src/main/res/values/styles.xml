@@ -13,15 +13,15 @@
     </style>
 
     <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="MySubTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="MyMenuText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>
