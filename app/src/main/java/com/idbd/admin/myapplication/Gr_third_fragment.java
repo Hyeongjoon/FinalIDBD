@@ -137,7 +137,7 @@ public class Gr_third_fragment extends Fragment{
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR , 2017);
         cal.set(Calendar.MONTH , 0);
-        cal.set(Calendar.DATE , 15);
+        cal.set(Calendar.DATE , 9);
         if(!Gr_info_Activity.gr_sche.equals("null")){  //시간표 없으면 null로 넘기게 해놓음 아니면 Try Catch문으로 가게되어서 ㅠㅠㅠㅠㅠ
             try {
                 JSONArray jsonArray = new JSONArray(Gr_info_Activity.gr_sche);
@@ -158,9 +158,12 @@ public class Gr_third_fragment extends Fragment{
         }
         weekView.goToDate(cal);
         int height = weekView.getHeight();
+        Log.d("msg" ,""+weekView.getHourHeight());
         int padding = weekView.getHeaderRowPadding();
-        height = height - (2 * padding);
-        weekView.setHourHeight(height / 24);
+        Log.d("msg" ,padding+"");
+        Log.d("msg" , height+"여긴안옴???");
+        //height = height - (2 * padding);
+        weekView.setHourHeight(5);
         weekView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
