@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.idbd.admin.myapplication.Helper.Get;
 import com.idbd.admin.myapplication.Helper.MakeDialog;
 import com.idbd.admin.myapplication.Helper.TokenInfo;
@@ -12,12 +13,15 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 /**
  * Created by admin on 2017-01-12.
@@ -51,6 +55,32 @@ public class MainSub3Fragment extends Fragment{
         }
     }
 
+    @Click(R.id.main_sub3_fifth_menu)
+    public void click_fifth(){
+        FirebaseAuth.getInstance().signOut();
+        LoginActivity_.intent(this).flags(FLAG_ACTIVITY_CLEAR_TOP).start();
+        getActivity().finish();
+    }
+
+    @Click(R.id.main_sub3_fourth_menu)
+    public void click_fourth(){
+
+    }
+
+    @Click(R.id.main_sub3_third_menu)
+    public void click_third(){
+
+    }
+
+    @Click(R.id.main_sub3_second_menu)
+    public void click_second(){
+
+    }
+
+    @Click(R.id.main_sub3_first_menu)
+    public void click_first(){
+
+    }
 
     @Click(R.id.main_sub3_my_schedule_btn)
     public void goMyschedule(){

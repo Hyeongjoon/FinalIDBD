@@ -96,6 +96,7 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
 
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         tabLayout.addOnTabSelectedListener(this);
+
         switch (page){
             case 1 : {
                 onTabSelected(tabLayout.getTabAt(0));

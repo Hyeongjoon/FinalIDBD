@@ -158,11 +158,7 @@ public class Gr_third_fragment extends Fragment{
         }
         weekView.goToDate(cal);
         int height = weekView.getHeight();
-        Log.d("msg" ,""+weekView.getHourHeight());
         int padding = weekView.getHeaderRowPadding();
-        Log.d("msg" ,padding+"");
-        Log.d("msg" , height+"여긴안옴???");
-        //height = height - (2 * padding);
         weekView.setHourHeight(5);
         weekView.setOnTouchListener(new View.OnTouchListener() {
             @Override

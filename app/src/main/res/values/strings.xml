@@ -31,7 +31,8 @@
     <string name="main_sub3_first_menu">고객센터 불편사항</string>
     <string name="main_sub3_second_menu">서비스 이용 약관</string>
     <string name="main_sub3_third_menu">비밀번호 변경</string>
-    <string name="main_sub3_fourth_menu">계정 탈퇴</string>
+    <string name="main_sub3_fourth_menu">로그아웃</string>
+    <string name="main_sub3_fifth_menu">계정 탈퇴</string>
     <string name="correct_sche_success_dialog">스케쥴 수정이 완료되었습니다.</string>
     <string name="wrong_gr_name_input">그룹이름은 1글자 이상으로 해주세요</string>
     <string name="download_path">/IDBDApp</string>

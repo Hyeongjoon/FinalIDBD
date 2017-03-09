@@ -19,12 +19,10 @@ public class TokenInfo extends FirebaseInstanceIdService {
         return TokenId;
     }
 
-    public static void setUserInfo ( String email , String name){
+    public static void setUserInfo (String email , String name){
         userEmail = email;
         userName = name;
     }
-
-    //token refresh 됐을때 작성할것
 
     public static String getUserEmail(){
         return userEmail;
