@@ -71,9 +71,9 @@ public class Gr_file_list_fragment extends Fragment {
             mDownloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
         }
         DownloadManager.Request request = new DownloadManager.Request( Uri.parse(url) );
-        request.setTitle("==타이틀==");
-        request.setDescription("==설명==");
-        String dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/IDBD").getAbsolutePath();
+        request.setTitle("파일을 다운로드 중입니다.");
+        request.setDescription("다운로드중입니다.");
+        String dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/IDBD_download").getAbsolutePath();
         File dir_IDBD = new File(dirPath);
         if(!dir_IDBD.exists()){
             dir_IDBD.mkdir();
@@ -87,7 +87,7 @@ public class Gr_file_list_fragment extends Fragment {
             }
         }
 
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/IDBD/", fileName );
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/IDBD_download/", fileName );
 
         mDownloadQueueId = mDownloadManager.enqueue(request);
     }

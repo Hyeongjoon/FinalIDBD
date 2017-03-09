@@ -139,29 +139,30 @@ public class Gr_second_fragment extends Fragment{
                     ||ContextCompat.checkSelfPermission(getActivity() , permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(getActivity(), CAMERA_PERMISSIONS , Gr_info_Activity_.MY_PERMISSIONS_REQUEST);
             } else{
-                String dirPath = Environment.getExternalStorageDirectory() + "/IDBD";
-                File dir_tracer = new File(dirPath);
+                File dir_tracer = new File(Environment.getExternalStorageDirectory(), "IDBD");
+                Log.d("msg" , dir_tracer.getAbsolutePath());
                 if(!dir_tracer.exists()){
                     dir_tracer.mkdir();
                 }
                 Date d = new Date(System.currentTimeMillis());
                 DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-                String filePath = dirPath +"/" + df.format(d) +".jpg";
                 String fileName = df.format(d) +".jpg";
-                File image = new File(new File(Environment.getExternalStorageDirectory(), "IDBD"), fileName);
+                File newFile = new File(dir_tracer , fileName);
+                Log.d("msg" , newFile.getAbsolutePath());
                 //File image = new File(filePath);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Log.d("msg" , image.getPath());
+
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                     mImageCaptureUri =  FileProvider.getUriForFile(
                             getContext(),
-                            getContext().getPackageName() + ".provider", image);
-                    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                            getContext().getPackageName() + ".fileprovider", newFile );
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, newFile);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     Log.d("msg" , mImageCaptureUri.toString());
+                    Log.d("msg" , mImageCaptureUri.getPath());
                 } else{
-                    mImageCaptureUri =  Uri.fromFile(image);
+                    mImageCaptureUri =  Uri.fromFile(newFile);
                 }
-
                 intent.putExtra(MediaStore.EXTRA_OUTPUT , mImageCaptureUri);
 
                 startActivityForResult(intent , CameraRequestCode);
@@ -172,13 +173,13 @@ public class Gr_second_fragment extends Fragment{
     @OnActivityResult(CameraRequestCode)
     void onResult(int resultCode, Intent data) {
         if(resultCode == RESULT_OK){
-            //
-            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,mImageCaptureUri));
             String[] temp = mImageCaptureUri.getPath().split("/");
             String fileName = temp[temp.length-1];
+            String aaa = Uri.parse("file://"+Environment.getExternalStorageDirectory() +"/IDBD/"+fileName).getPath();
+            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE , Uri.parse("file://"+Environment.getExternalStorageDirectory() +"/IDBD/"+fileName))); //이거 누가부터 어캐해야하나........슈벌탱.........
             String fileKey = "file/" + Gr_info_Activity_.gid +"/"+fileName;
-
-            PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(mImageCaptureUri.getPath()));
+            File dir_tracer = new File(Environment.getExternalStorageDirectory(), "IDBD");
+            PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(dir_tracer , fileName));
             this.upload(por , fileKey , true);
         }
     }
