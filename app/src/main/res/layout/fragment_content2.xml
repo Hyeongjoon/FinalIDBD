@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbars="none"
+    android:fillViewport="true">
+   <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
         <Button
             android:id="@+id/main_sub2_add_group"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:text="@string/main_sub2_gr_create"
-            android:textColor="@color/white"
+            android:textColor="@color/high_blue"
             android:textSize="14dp"
-            android:background="@color/high_blue"
+            android:background="@drawable/chat_send_selector"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/main_sub2_group_list"
@@ -18,4 +30,5 @@
             android:layout_height="match_parent"
             android:scrollbars="none"
             />
-</LinearLayout>
+   </LinearLayout>
+</ScrollView>
