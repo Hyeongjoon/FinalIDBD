@@ -59,7 +59,7 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
         public TextView groupNum;
         public Button groupNewFileNum;
         public Button groupNewChatNum;
-        public View groupColor;
+        public LinearLayout groupColor;
 
         public LinearLayout linearLayout;
         public RelativeLayout layout2;
@@ -73,7 +73,7 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
             groupNum = (TextView)v.findViewById(R.id.main_sub_2_gr_num);
             groupNewChatNum = (Button)v.findViewById(R.id.new_chat_num_btn);
             groupNewFileNum = (Button)v.findViewById(R.id.new_file_num_btn);
-            groupColor = v.findViewById(R.id.main_sub2_gr_color);
+            groupColor = (LinearLayout)v.findViewById(R.id.main_sub2_gr_color);
             layout2 = (RelativeLayout)v.findViewById(R.id.main_sub2_item_layout2);
             layout3 = (LinearLayout)v.findViewById(R.id.main_sub2_item_layout3);
             layout4 = (LinearLayout)v.findViewById(R.id.main_sub2_item_layout4);
@@ -228,8 +228,8 @@ public class MainSub2Adapter extends RecyclerView.Adapter <MainSub2Adapter.ViewH
                 //Gr_info_Activity_.intent(a).extra("page" , 4).extra("gid" , getItemId(position)).start();
             }
         });
-        ImageView imageView = (ImageView)holder.linearLayout.findViewById(R.id.main_sub2_gr_btn);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        LinearLayout linearLayout = (LinearLayout) holder.linearLayout.findViewById(R.id.main_sub2_gr_btn);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Context c = holder.linearLayout.getContext();

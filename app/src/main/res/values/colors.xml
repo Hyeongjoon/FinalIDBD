@@ -3,16 +3,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="gr_color1">#1AE91942</color>
-    <color name="gr_color2">#1AFF4081</color>
-    <color name="gr_color3">#1AE919D4</color>
-    <color name="gr_color4">#1A5319E9</color>
-    <color name="gr_color5">#1A8900FF</color>
-    <color name="gr_color6">#1A19E2E9</color>
-    <color name="gr_color7">#1A01FF9E</color>
-    <color name="gr_color8">#1AEFFF00</color>
-    <color name="gr_color9">#1AFFBD13</color>
-    <color name="gr_color10">#1ABDBDBD</color>
+    <color name="gr_color1">#E15057</color>
+    <color name="gr_color2">#50D5E1</color>
+    <color name="gr_color3">#EB963A</color>
+    <color name="gr_color4">#69BE23</color>
+    <color name="gr_color5">#AC58FA</color>
+    <color name="gr_color6">#FACC2E</color>
+    <color name="gr_color7">#01DFA5</color>
+    <color name="gr_color8">#5882FA</color>
+    <color name="gr_color9">#F7819F</color>
+    <color name="gr_color10">#585858</color>
     <color name="white">#FFFFFF</color>
     <color name="white_trans80">#CCFFFFFF</color>
     <color name="white_trans50">#80FFFFFF</color>
@@ -25,5 +25,6 @@
     <color name="low_blue">#A8CECB</color>
     <color name="week_gray">#A4A4A4</color>
     <color name="week_black">#585858</color>
+    <color name="btn_gray">#A4A4A4</color>
 
 </resources>
