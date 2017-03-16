@@ -182,6 +182,7 @@ public class SaveActivity extends AppCompatActivity {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
+            makePDialog();
             dialogInterface.cancel();
             sche_save();
         }};
@@ -190,7 +191,6 @@ public class SaveActivity extends AppCompatActivity {
 
     @Background
     void sche_save(){
-            makePDialog();
             final FormBody.Builder temp = new FormBody.Builder();
 
             for(int i = 0 ; i < events.size() ; i++){
@@ -198,28 +198,28 @@ public class SaveActivity extends AppCompatActivity {
             }
             temp.add("size" , events.size()+"");
             RequestBody formbody = temp.add("token" , TokenInfo.getTokenId()).build();
-            postInActivity(formbody);
-    }
-
-    @Background
-    protected void postInActivity(RequestBody formbody) {
         try {
             JSONObject jsonObject = new JSONObject(Post.post(save_url  , formbody));
-            pDialog.cancel();
             String result = jsonObject.get("result").toString();
             if(result.equals("true")){
+                pDialog.dismiss();
                 goMain();
+
             } else{
+                pDialog.cancel();
                 makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
             }
         } catch (JSONException e) {
+            pDialog.cancel();
             e.printStackTrace();
+            makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
         } catch (IOException e) {
             e.printStackTrace();
             pDialog.cancel();               //Post받다가 오류나면 여길로 바로오니까 2번적어줘야하겠지
             makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
         }
     }
+
 
     @UiThread
     protected void makePDialog(){
@@ -239,6 +239,5 @@ public class SaveActivity extends AppCompatActivity {
     public void goMain(){
         MainActivity_.intent(this).start();
         finish();
-
     }
 }

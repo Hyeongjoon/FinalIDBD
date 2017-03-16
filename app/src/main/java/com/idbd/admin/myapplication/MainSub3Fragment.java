@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.idbd.admin.myapplication.Helper.Get;
 import com.idbd.admin.myapplication.Helper.MakeDialog;
 import com.idbd.admin.myapplication.Helper.TokenInfo;
@@ -55,14 +56,15 @@ public class MainSub3Fragment extends Fragment{
         }
     }
 
-    @Click(R.id.main_sub3_fifth_menu)
+    @Click(R.id.main_sub3_fourth_menu)
     public void click_fifth(){
-        FirebaseAuth.getInstance().signOut();
-        LoginActivity_.intent(this).flags(FLAG_ACTIVITY_CLEAR_TOP).start();
-        getActivity().finish();
+            FirebaseAuth.getInstance().signOut();
+            LoginActivity_.intent(this).flags(FLAG_ACTIVITY_CLEAR_TOP).start();
+            getActivity().finish();
+
     }
 
-    @Click(R.id.main_sub3_fourth_menu)
+    @Click(R.id.main_sub3_fifth_menu)
     public void click_fourth(){
 
     }

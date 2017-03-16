@@ -74,6 +74,7 @@ public class LoginActivity extends Activity{
     }
 
     void goMainActivity(){
+        pDialog.dismiss();
         MainActivity_.intent(this).start();
         finish();
     }

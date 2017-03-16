@@ -1,15 +1,22 @@
 package com.idbd.admin.myapplication.Helper;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+
+import java.io.IOException;
 
 /**
  * Created by admin on 2017-01-13.
  */
 
+
 public class TokenInfo extends FirebaseInstanceIdService {
     private static String TokenId;
     private static String userEmail;
     private static String userName;
+
+    private String refreshURI = "http://52.78.18.19/refresh?token=";
 
     public static void setTokenId(String id){
         TokenId = id;
@@ -30,5 +37,11 @@ public class TokenInfo extends FirebaseInstanceIdService {
 
     public static String getUserName(){
         return userName;
+    }
+
+    @Override
+    public void onTokenRefresh() {
+
+            FirebaseAuth.getInstance().signOut();
     }
 }
