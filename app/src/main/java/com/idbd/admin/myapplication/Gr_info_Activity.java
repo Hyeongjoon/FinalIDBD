@@ -3,6 +3,9 @@ package com.idbd.admin.myapplication;
 
 
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -68,6 +71,12 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.high_blue, this.getTheme())));
+        } else{
+            getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.high_blue)));
+        }
+        getSupportActionBar().setLogo(R.drawable.actionbar_logo_white);
         temp_gid = gid;
         setContentView(R.layout.activity_gr_main);
         for(int i = 0 ; i < user_list.length() ; i++){
