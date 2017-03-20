@@ -8,14 +8,8 @@
         android:id="@+id/gr_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        style="@style/GrTabLayout"
-        >
-    </android.support.design.widget.TabLayout>
-=======
         style="@style/GrTabLayout">
         </android.support.design.widget.TabLayout>
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
     <android.support.v4.view.ViewPager
         android:id="@+id/gr_pager"
         android:layout_width="match_parent"

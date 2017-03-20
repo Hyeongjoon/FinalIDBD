@@ -1,10 +1,8 @@
 package com.idbd.admin.myapplication;
 
-<<<<<<< HEAD
+
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-=======
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -50,16 +48,12 @@ public class File_click_activity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.file_click);
-<<<<<<< HEAD
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.high_blue, this.getTheme())));
         } else{
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.high_blue)));
         }
         getSupportActionBar().setLogo(R.drawable.actionbar_logo_white);
-=======
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

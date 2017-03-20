@@ -38,8 +38,5 @@
     <string name="download_path">/IDBDApp</string>
     <string name="bucket">sendwitchtracer</string>
     <string name="upload_dialog_text">업로드할 파일의 형식을 선택해주세요</string>
-<<<<<<< HEAD
-=======
     <string name="show_schedule">모두의 시간표</string>
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 </resources>

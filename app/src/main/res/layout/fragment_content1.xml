@@ -7,10 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-<<<<<<< HEAD
-=======
     android:background="@drawable/background_white"
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
     >
 
     <ImageView
@@ -42,13 +39,8 @@
         android:background="@drawable/edittext_outline2"
         android:paddingLeft="10dp"
         android:layout_marginTop="42dp"
-<<<<<<< HEAD
-        android:layout_gravity="center_horizontal" />
-=======
         android:layout_gravity="center_horizontal"
         android:textCursorDrawable="@color/high_blue"/>
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
-
     <Button
         android:id="@+id/addCode"
         android:layout_gravity="center"
@@ -56,13 +48,8 @@
         android:layout_height="37dp"
         android:text="@string/main_sub1_btn"
         android:layout_marginTop="57dp"
-<<<<<<< HEAD
-        android:background="@drawable/button_outline3"
-        android:textColor="@color/text_black"
-=======
         android:background="@drawable/chat_send_selector"
         android:textColor="@color/white"
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
         android:typeface="monospace"
         android:textSize="14dp" />
 </LinearLayout>

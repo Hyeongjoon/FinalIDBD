@@ -39,12 +39,4 @@ public class TokenInfo extends FirebaseInstanceIdService {
         return userName;
     }
 
-<<<<<<< HEAD
-=======
-    @Override
-    public void onTokenRefresh() {
-
-            FirebaseAuth.getInstance().signOut();
-    }
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 }

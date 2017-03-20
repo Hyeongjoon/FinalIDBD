@@ -49,13 +49,8 @@
         app:noOfVisibleDays="5"
         app:headerRowBackgroundColor="#ffefefef"
         app:dayBackgroundColor="#05000000"
-<<<<<<< HEAD
-        app:todayBackgroundColor="#05000000"
-        app:todayHeaderTextColor="#8f000000"
-=======
         app:todayBackgroundColor="#FE2E64"
         app:todayHeaderTextColor="#FE2E64"
->>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
         app:headerColumnBackground="#1848adff"
         app:firstDayOfWeek="monday"
         />
