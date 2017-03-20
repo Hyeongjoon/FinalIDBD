@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.idbd.admin.myapplication"
+    android:versionCode="3"
+    android:versionName="1.2"
+    android:minSdkVersion="8"
+    >
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.idbd.admin.myapplication.LoginActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.SignUpActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.EmailSucActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.FindEmailActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.ModifyPwdActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.SaveActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.MainActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.Gr_info_Activity_"
+            android:parentActivityName="com.idbd.admin.myapplication.MainActivity_"
+            />
+        <activity android:name="com.idbd.admin.myapplication.MyScheduleActivity_"
+            android:parentActivityName="com.idbd.admin.myapplication.MainActivity_"
+            />
+        <activity android:name="com.idbd.admin.myapplication.File_click_activity_"
+            android:parentActivityName="com.idbd.admin.myapplication.Gr_info_Activity_"
+            />
+        <activity android:name="com.idbd.admin.myapplication.IntroActivity_">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name="com.idbd.admin.myapplication.Helper.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.idbd.admin.myapplication.Helper.TokenInfo" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+    </application>
+
+</manifest>

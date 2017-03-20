@@ -1,0 +1,36 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/MyActionBar</item>
+
+    </style>
+
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="titleTextStyle">@style/MyTitleTextStyle</item>
+        <item name="background">@color/white</item>
+        <item name="android:subtitleTextStyle">@style/MySubTitleText</item>
+        <item name="logo">@drawable/actionbar_logo_blue</item>
+        <item name="displayOptions">useLogo|showHome</item>
+        <!-- Support library compatibility -->
+        <item name="subtitleTextStyle">@style/MySubTitleText</item>
+    </style>
+
+    <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/high_blue</item>
+    </style>
+
+    <style name="MySubTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/high_blue</item>
+    </style>
+
+    <style name="MyMenuText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu">
+        <item name="android:textColor">@color/high_blue</item>
+    </style>
+
+    <style name="GrTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/high_blue</item>
+        <item name="tabIndicatorColor">@color/high_blue</item>
+        <item name="tabTextColor">@color/btn_gray</item>
+        <item name="tabBackground">@color/white</item>
+    </style>
+
+</resources>

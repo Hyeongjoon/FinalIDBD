@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_sub2_gr_btn_click">
+        <item>그룹 이름 변경</item>
+        <item>그룹 색깔 변경</item>
+        <item>그룹 탈퇴</item>
+    </string-array>
+    <string-array name="main_sub2_gr_color_pick_list">
+        <item><font fgcolor="#E91942">a</font></item>
+        <item><font fgcolor="#FF4081">b</font></item>
+        <item><font fgcolor="#E919D4">c</font></item>
+        <item><font fgcolor="#5319E9">d</font></item>
+        <item><font fgcolor="#8900FF">e</font></item>
+        <item><font fgcolor="#19E2E9">f</font></item>
+        <item><font fgcolor="#01FF9E">g</font></item>
+        <item><font fgcolor="#EFFF00">h</font></item>
+        <item><font fgcolor="#FFBD13">i</font></item>
+        <item><font fgcolor="#BDBDBD">j</font></item>
+    </string-array>
+    <string-array name="file_click_my_file">
+        <item>파일 정보 보기</item>
+        <item>파일 삭제 하기</item>
+    </string-array>
+    <string-array name="file_click_not_my_file">
+        <item>파일 정보 보기</item>
+    </string-array>
+</resources>

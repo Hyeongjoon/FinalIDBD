@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="gr_color1">#E15057</color>
+    <color name="gr_color2">#50D5E1</color>
+    <color name="gr_color3">#EB963A</color>
+    <color name="gr_color4">#69BE23</color>
+    <color name="gr_color5">#AC58FA</color>
+    <color name="gr_color6">#FACC2E</color>
+    <color name="gr_color7">#01DFA5</color>
+    <color name="gr_color8">#5882FA</color>
+    <color name="gr_color9">#F7819F</color>
+    <color name="gr_color10">#585858</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_trans80">#CCFFFFFF</color>
+    <color name="white_trans50">#80FFFFFF</color>
+    <color name="white_trans30">#4DFFFFFF</color>
+    <color name="white_trans20">#33FFFFFF</color>
+    <color name="transparent">#00FF4081</color>
+    <color name="text_black">#000000</color>
+    <color name="high_blue">#004063</color>
+    <color name="high_blue2">#80004063</color>
+    <color name="low_blue">#A8CECB</color>
+    <color name="box_blue">#10667E</color>
+    <color name="week_gray">#A4A4A4</color>
+    <color name="week_black">#585858</color>
+    <color name="btn_gray">#A4A4A4</color>
+
+</resources>
