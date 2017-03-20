@@ -32,6 +32,7 @@ import org.json.JSONObject;
 public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.OnTabSelectedListener{
 
     public final static int MY_PERMISSIONS_REQUEST= 1;
+    public final static int MY_STORAGE_REQUEST= 2;
 
     private int NUM_PAGES = 4;		// 최대 페이지의 수
 
@@ -241,7 +242,26 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
                 }
                 return;
             }
+            case MY_STORAGE_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                        Log.d("msg" , "여긴 1");
+                    }
+                    if(grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                        Log.d("msg" , "여긴 2");
+                    }
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
 
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
             // other 'case' lines to check for other
             // permissions this app might request
         }

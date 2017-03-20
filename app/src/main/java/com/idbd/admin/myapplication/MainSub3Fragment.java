@@ -58,7 +58,7 @@ public class MainSub3Fragment extends Fragment{
 
     @Click(R.id.main_sub3_fourth_menu)
     public void click_fifth(){
-            FirebaseAuth.getInstance().signOut();
+            FirebaseAuth.getInstance().getCurrentUser().delete();
             LoginActivity_.intent(this).flags(FLAG_ACTIVITY_CLEAR_TOP).start();
             getActivity().finish();
 
