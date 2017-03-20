@@ -92,10 +92,13 @@ public class FileListAdapter extends RecyclerView.Adapter <FileListAdapter.ViewH
                         }
                     }
                 });
+<<<<<<< HEAD
                 for(int i = 0 ; i <4; i++){
                     Glide.with(imageViewArr[i].getContext()).load(R.drawable.file).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.1f).into(imageViewArr[i]);
                 } //다시 돌려놓기 파일모습으로
 
+=======
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
                 for(int i = 0 ; i<jsonArray.length() ; i++){
                     JSONObject tempObject = jsonArray.getJSONObject(i);
                     if(tempObject.getInt("image")==1) {

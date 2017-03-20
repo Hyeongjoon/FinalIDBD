@@ -16,7 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+<<<<<<< HEAD
         android:padding="24dp"
+=======
+        android:padding="10dp"
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
         android:background="@color/white"
         >
         <Button
@@ -35,7 +39,11 @@
             android:layout_height="wrap_content"
             android:text="카메라"
             android:textSize="15dp"
+<<<<<<< HEAD
             android:textColor="@color/high_blue"
+=======
+            android:textColor="@color/white"
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
             android:layout_weight="1"
             android:background="@drawable/upload_button2"
             android:layout_marginLeft="5dp"

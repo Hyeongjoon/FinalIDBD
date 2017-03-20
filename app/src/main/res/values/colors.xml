@@ -23,6 +23,10 @@
     <color name="high_blue">#004063</color>
     <color name="high_blue2">#80004063</color>
     <color name="low_blue">#A8CECB</color>
+<<<<<<< HEAD
+=======
+    <color name="box_blue">#10667E</color>
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
     <color name="week_gray">#A4A4A4</color>
     <color name="week_black">#585858</color>
     <color name="btn_gray">#A4A4A4</color>

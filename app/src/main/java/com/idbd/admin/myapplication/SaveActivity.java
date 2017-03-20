@@ -202,6 +202,7 @@ public class SaveActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(Post.post(save_url  , formbody));
             String result = jsonObject.get("result").toString();
             if(result.equals("true")){
+<<<<<<< HEAD
                 if(pDialog!=null) {
                     pDialog.cancel();
                 }
@@ -217,13 +218,28 @@ public class SaveActivity extends AppCompatActivity {
             if(pDialog!=null) {
                 pDialog.cancel();
             }
+=======
+                pDialog.dismiss();
+                goMain();
+
+            } else{
+                pDialog.cancel();
+                makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
+            }
+        } catch (JSONException e) {
+            pDialog.cancel();
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
             e.printStackTrace();
             makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
         } catch (IOException e) {
             e.printStackTrace();
+<<<<<<< HEAD
             if(pDialog!=null) {
                 pDialog.cancel();
             }             //Post받다가 오류나면 여길로 바로오니까 2번적어줘야하겠지
+=======
+            pDialog.cancel();               //Post받다가 오류나면 여길로 바로오니까 2번적어줘야하겠지
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
             makeDialog("내부 서버 오류입니다. 잠시후에 시도해주세요");
         }
     }
@@ -245,9 +261,12 @@ public class SaveActivity extends AppCompatActivity {
     }
 
     public void goMain(){
+<<<<<<< HEAD
         if(pDialog!=null) {
             pDialog.dismiss();
         }
+=======
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
         MainActivity_.intent(this).start();
         finish();
     }

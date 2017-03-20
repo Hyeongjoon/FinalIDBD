@@ -8,5 +8,9 @@
         android:bottomRightRadius="5dp"
         android:topLeftRadius="5dp"
         android:topRightRadius="5dp" />
+<<<<<<< HEAD
 </shape>
 
+=======
+</shape>
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609

@@ -32,7 +32,10 @@ import org.json.JSONObject;
 public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.OnTabSelectedListener{
 
     public final static int MY_PERMISSIONS_REQUEST= 1;
+<<<<<<< HEAD
     public final static int MY_STORAGE_REQUEST= 2;
+=======
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 
     private int NUM_PAGES = 4;		// 최대 페이지의 수
 
@@ -242,6 +245,7 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
                 }
                 return;
             }
+<<<<<<< HEAD
             case MY_STORAGE_REQUEST: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
@@ -262,6 +266,9 @@ public class Gr_info_Activity extends AppCompatActivity  implements TabLayout.On
                 }
                 return;
             }
+=======
+
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
             // other 'case' lines to check for other
             // permissions this app might request
         }

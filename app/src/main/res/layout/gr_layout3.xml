@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:background="@color/white"
+<<<<<<< HEAD
     android:paddingTop="10dp"
     >
     <RelativeLayout
@@ -19,6 +20,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시간표 설정"
+=======
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_schedule"
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
             android:paddingLeft="10dp"
@@ -29,6 +40,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:textColor="@color/text_black"/>
+<<<<<<< HEAD
 
         <ImageView
             android:id = "@+id/cal_modify"
@@ -51,6 +63,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_toLeftOf="@id/cal_modify" />
+=======
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
     </RelativeLayout>
     <com.alamkanak.weekview.WeekView
         android:id="@+id/gr_layout3_weekview"

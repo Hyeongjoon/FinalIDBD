@@ -1,13 +1,17 @@
 package com.idbd.admin.myapplication;
 
+<<<<<<< HEAD
 import android.*;
 import android.Manifest;
+=======
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+<<<<<<< HEAD
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +20,12 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+=======
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.Fragment;
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,11 +69,14 @@ public class Gr_file_list_fragment extends Fragment {
     private DownloadManager mDownloadManager; //다운로드 매니저.
     private long mDownloadQueueId; //다운로드 큐 아이디..
 
+<<<<<<< HEAD
     private static final String[] STORAGE_PERMISSION = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
     };
 
+=======
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
     /**
      * 다운로드 완료 액션을 받을 리시버.
      */
@@ -78,8 +91,11 @@ public class Gr_file_list_fragment extends Fragment {
     };
 
     public void download(String url) {
+<<<<<<< HEAD
 
         //요기 권한설정
+=======
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
         if (mDownloadManager == null) {
             mDownloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
         }
@@ -143,6 +159,7 @@ public class Gr_file_list_fragment extends Fragment {
         downBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
                     download(location);
                 } else{
@@ -153,6 +170,9 @@ public class Gr_file_list_fragment extends Fragment {
                         download(location);
                     }
                 }
+=======
+                download(location);
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
             }
         });
 

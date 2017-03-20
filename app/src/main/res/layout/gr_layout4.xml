@@ -36,7 +36,12 @@
             android:paddingRight="5dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
+<<<<<<< HEAD
             android:layout_gravity="center"/>
+=======
+            android:layout_gravity="center"
+            android:textCursorDrawable="@color/high_blue2"/>
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
         <Button
             android:id="@+id/sned_chat"
             android:layout_width="match_parent"

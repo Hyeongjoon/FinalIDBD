@@ -2,6 +2,11 @@ package com.idbd.admin.myapplication;
 
 
 
+<<<<<<< HEAD
+=======
+import android.graphics.Typeface;
+import android.media.tv.TvContract;
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,12 +14,21 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.AppCompatActivity;
+<<<<<<< HEAD
+=======
+import android.view.ViewGroup;
+import android.widget.TextView;
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 
 
 import com.idbd.admin.myapplication.Helper.ZoomOutPageTransformer;
 
 
 import org.androidannotations.annotations.EActivity;
+<<<<<<< HEAD
+=======
+import org.w3c.dom.Text;
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
 
 
 @EActivity

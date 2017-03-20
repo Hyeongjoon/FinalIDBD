@@ -28,6 +28,12 @@
 
     <style name="GrTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabSelectedTextColor">@color/high_blue</item>
+<<<<<<< HEAD
+=======
+        <item name="tabIndicatorColor">@color/high_blue</item>
+        <item name="tabTextColor">@color/btn_gray</item>
+        <item name="tabBackground">@color/white</item>
+>>>>>>> 7e730503479d66aff7bc73f7fcac21b60eb5f609
     </style>
 
 </resources>
