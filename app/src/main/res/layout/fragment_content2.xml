@@ -3,26 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background_white"
-       >
-        <Button
-            android:id="@+id/main_sub2_add_group"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/main_sub2_gr_create"
-            android:textColor="@color/white"
-            android:textSize="14dp"
-            android:background="@drawable/make_group_selector"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            />
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_sub2_group_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
-            />
+    android:background="@color/white">
+   <ImageView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/main_image"
+       />
    </LinearLayout>

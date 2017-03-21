@@ -68,11 +68,6 @@ public class LoginActivity extends Activity{
         SignUpActivity_.intent(this).start();
     }
 
-    void goSaveActivity(){
-        SaveActivity_.intent(this).start();
-        finish();
-    }
-
     void goMainActivity(){
         pDialog.dismiss();
         MainActivity_.intent(this).start();
@@ -140,11 +135,7 @@ public class LoginActivity extends Activity{
                                             if (task.isSuccessful()) {
                                                 String idToken = task.getResult().getToken();  //id 토큰 알아오는곳
                                                 TokenInfo.setTokenId(idToken);
-                                                if(goMain){
                                                     goMainActivity();
-                                                } else{
-                                                    goSaveActivity();
-                                                }
                                             } else {
                                                 makeDialog("로그인 실패 잠시후에 시도해주세요");
                                             }

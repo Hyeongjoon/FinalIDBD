@@ -32,6 +32,22 @@ public class MakeDialog {
         builder.show();
     }
 
+    public static void oneBtnNotCancleDialog(Activity a , String content){
+        AlertDialog.Builder builder = new AlertDialog.Builder(a);     // 여기서 this는 Activity의 this
+        // 여기서 부터는 알림창의 속성 설정
+        builder.setTitle(R.string.dialog_title)        // 제목 설정
+                .setMessage(content)        // 메세지 설정
+                .setCancelable(true)        // 뒤로 버튼 클릭시 취소 가능 설정
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener(){
+                    // 확인 버튼 클릭시 설정
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton){
+                        dialog.cancel();
+                    }
+                });
+        builder.show();
+    }
+
     public static void twoBtn(Activity a , String content , DialogInterface.OnClickListener listener){
         AlertDialog.Builder builder = new AlertDialog.Builder(a);     // 여기서 this는 Activity의 this
         // 여기서 부터는 알림창의 속성 설정

@@ -2,6 +2,7 @@ package com.idbd.admin.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -9,6 +10,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.idbd.admin.myapplication.Helper.MakeDialog;
 import com.idbd.admin.myapplication.Helper.Post;
 import com.idbd.admin.myapplication.Helper.TokenInfo;
@@ -35,7 +41,7 @@ import okhttp3.RequestBody;
 
 @EFragment(R.layout.fragment_content1)
 public class MainSub1Fragment extends Fragment{
-    private String addCode = "http://52.78.18.19/gr/addByCode/";
+    private String confirm = "http://52.78.18.19/confirm/";
 
     ProgressDialog pDialog;
 
@@ -44,37 +50,59 @@ public class MainSub1Fragment extends Fragment{
 
     @Click(R.id.addCode)
     public void addCodeBtn(){
-        String code = codeInput.getText().toString().trim();
-        codeInput.setText("");
-        if(code.length()!=5){
-            makeDialog(getString(R.string.main_sub1_wrong_code_dialog));
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            builder.setCancelable(true)
+                    .setTitle(R.string.dialog_title)
+                    .setMessage("코드입력을 하려면 로그인이 필요합니다\n로그인 하시겠습니까?")
+                    .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            LoginActivity_.intent(getActivity()).start();
+                            getActivity().finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.dialog_cancle, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+            builder.show();
         } else{
-            makeInputDialog(code);
+            String code = codeInput.getText().toString().trim();
+            codeInput.setText("");
+            if(code.length()!=5){
+                makeDialog(getString(R.string.main_sub1_wrong_code_dialog));
+            } else{
+                pDialog = ProgressDialog.show(getActivity(), "확인중입니다....", "Please wait", true, false);
+                addCode(code);
+            }
         }
     }
 
     @Background
-    public void addCode(String code , String name){
+    public void addCode(String code){
         RequestBody formBody = new FormBody.Builder()
                 .add("code" , code)
-                .add("name" , name)
                 .add("reg_id", FirebaseInstanceId.getInstance().getToken())
                 .build();
         try {
-                JSONObject result =  new JSONObject(Post.post(addCode + TokenInfo.getTokenId(),formBody));
+                JSONObject result =  new JSONObject(Post.post(confirm + TokenInfo.getTokenId(),formBody));
                 if(result.get("result").equals("true")){
                     pDialog.cancel();
-                    toRight();
-                    ((MainSub2Fragment)((MainActivity)getActivity()).getFragmentItem(1)).InsertGr(result); //2번에 붙어있는 어뎁터 불러와서 데이터 0번에 삽입
-                        //추가 정상적으로 되고 넘어왔을때
-                } else if(result.get("content").equals("code")){
+                    makeNotCancleDialog(getString(R.string.won_prize));
+                } else if(result.get("content").equals("non")){
                     pDialog.cancel();
                     makeDialog(getString(R.string.main_sub1_wrong_code_dialog));
                         //코드가 틀린코드를 입력했을때
-                } else if(result.get("content").equals("duplication")){
+                } else if(result.get("content").equals("selected")){
                     pDialog.cancel();
-                    makeDialog(getString(R.string.main_sub1_dupli_code));
-                    //코드가 이미 있을때
+                    makeDialog(getString(R.string.main_sub1_selected_code));
+                } else if(result.get("content").equals("server")){
+                    pDialog.cancel();
+                    makeDialog(getString(R.string.server_wrong));
                 }
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,38 +117,7 @@ public class MainSub1Fragment extends Fragment{
     }
 
     @UiThread
-    public void toRight(){
-        ((MainActivity)getActivity()).mViewPager.arrowScroll(View.FOCUS_RIGHT);
+    public void makeNotCancleDialog(String content){
+        MakeDialog.oneBtnNotCancleDialog(getActivity() , content);
     }
-
-    @UiThread
-    public void makeInputDialog(final String code){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater layoutInflaterAndroid = LayoutInflater.from(getActivity());
-        final View mView = layoutInflaterAndroid.inflate(R.layout.user_input_dialog_box, null);
-        builder.setView(mView)
-                .setCancelable(true)
-                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String gr_title = ((EditText)mView.findViewById(R.id.userInputDialog)).getText().toString().trim();
-                        if(gr_title.length()==0){
-                            MakeDialog.oneBtnDialog(getActivity() , getString(R.string.wrong_gr_name_input));
-                        } else{
-                            pDialog = ProgressDialog.show(getActivity(), "그룹 추가중입니다.", "Please wait", true, false);
-                            addCode(code , gr_title );
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.dialog_cancle, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-        TextView titleText = (TextView)mView.findViewById(R.id.dialogTitle);
-        titleText.setText(R.string.main_sub2_gr_create_dialog_title);
-        builder.show();  //Edit Text에서 불러오는법 몰라서 일단 여기다가 넣어놓음................후........
-    }
-
 }

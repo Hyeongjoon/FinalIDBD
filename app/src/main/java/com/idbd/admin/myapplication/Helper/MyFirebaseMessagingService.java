@@ -12,10 +12,9 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.idbd.admin.myapplication.Gr_info_Activity_;
+
 import com.idbd.admin.myapplication.IntroActivity_;
 import com.idbd.admin.myapplication.R;
-import com.idbd.admin.myapplication.adapter.ChatAdapter;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -58,39 +57,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
         // [END_EXCLUDE]
 
-
-        if (remoteMessage.getData().size() > 0){
-            if(Gr_info_Activity_.temp_gid == null){
-                Log.d("msg" , "여긴 언제오냐");
-                sendPushNotification(remoteMessage); //background일때
-                insertMessage(getApplicationContext() , remoteMessage);
-                add_num(TokenInfo.getTokenId() , remoteMessage.getData().get("gid")+"");
-            } else if(Gr_info_Activity_.temp_gid == Long.parseLong(remoteMessage.getData().get("gid"))){
-                try {
-                Log.d("msg" , remoteMessage.getData()+"");
-                insertMessage(getApplicationContext() , remoteMessage);
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("content" , remoteMessage.getData().get("text"));
-                    String name = "알수없음";
-                    for(int j = 0 ; j<Gr_info_Activity_.user_list.length() ; j++){
-                        JSONObject userObject = Gr_info_Activity_.user_list.getJSONObject(j);
-                        if(userObject.getInt("uid") == Integer.parseInt(remoteMessage.getData().get("writer"))){
-                            name = userObject.getString("name");
-                            break;
-                        }
-                    }
-                    jsonObject.put("name" , name);
-                ChatAdapter.adapter.insertChat(jsonObject);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else{
-                Log.d("msg" , "여긴 언제오냐2");
-                sendPushNotification(remoteMessage); //딴곳에 있을때
-                insertMessage(getApplicationContext() , remoteMessage);
-                add_num(TokenInfo.getTokenId() , remoteMessage.getData().get("gid")+"");
-            }
-        }
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ

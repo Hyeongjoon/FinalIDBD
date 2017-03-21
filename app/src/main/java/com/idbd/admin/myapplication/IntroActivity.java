@@ -28,7 +28,7 @@ public class IntroActivity extends Activity {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            LoginActivity_.intent(IntroActivity.this).start().withAnimation(android.R.anim.fade_in, android.R.anim.fade_out);
+            MainActivity_.intent(IntroActivity.this).start().withAnimation(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();
         }
 };
@@ -37,31 +37,20 @@ public class IntroActivity extends Activity {
 
     @AfterViews
     void goMain(){
+        init();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            if (user != null) {
-                                user.getToken(true)
-                                        .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                                            public void onComplete(@NonNull Task<GetTokenResult> task) {
-                                                if (task.isSuccessful()) {
-                                                    String idToken = task.getResult().getToken();  //id 토큰 알아오는곳
-                                                    TokenInfo.setTokenId(idToken);
-                                                    goMainActivity();
-                                                    Log.d("msg" , ""+FirebaseInstanceId.getInstance().getToken());
-                                                } else {
-                                                    init();
-                                                    handler.postDelayed(runnable, 1000);
-                                                }
-                        }
-                    });
-        } else {
-            init();
-            handler.postDelayed(runnable, 1000);
+            if (user != null) {
+                user.getToken(true)
+                        .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                            public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                if (task.isSuccessful()) {
+                                    String idToken = task.getResult().getToken();  //id 토큰 알아오는곳
+                                    TokenInfo.setTokenId(idToken);
+                                }
+                    }
+            });
         }
-    }
-
-    void goMainActivity(){
-        MainActivity_.intent(this).start();
-        finish();
+        handler.postDelayed(runnable, 1000);
     }
 
     public void init() {
