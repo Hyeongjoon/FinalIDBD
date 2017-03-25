@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 import com.idbd.admin.myapplication.Helper.MakeDialog;
+import com.idbd.admin.myapplication.Helper.MakeRandomNum;
 import com.idbd.admin.myapplication.Helper.Post;
 import com.idbd.admin.myapplication.Helper.TokenInfo;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -74,7 +75,7 @@ public class MainSub1Fragment extends Fragment{
             String code = codeInput.getText().toString().trim();
             codeInput.setText("");
             if(code.length()!=5){
-                makeDialog(getString(R.string.main_sub1_wrong_code_dialog));
+                makeDialog(getString(R.string.worng_code_input));
             } else{
                 pDialog = ProgressDialog.show(getActivity(), "확인중입니다....", "Please wait", true, false);
                 addCode(code);
@@ -82,11 +83,15 @@ public class MainSub1Fragment extends Fragment{
         }
     }
 
+    @Click(R.id.random_btn)
+    public void randomInput(){
+        codeInput.setText(MakeRandomNum.makeNum());
+    }
+
     @Background
     public void addCode(String code){
         RequestBody formBody = new FormBody.Builder()
                 .add("code" , code)
-                .add("reg_id", FirebaseInstanceId.getInstance().getToken())
                 .build();
         try {
                 JSONObject result =  new JSONObject(Post.post(confirm + TokenInfo.getTokenId(),formBody));

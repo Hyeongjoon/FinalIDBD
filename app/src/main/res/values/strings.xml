@@ -20,10 +20,11 @@
     <string name="find_pwd_info">코드가 발송되었습니다. \n Email에서 코드를 확인 후 입력해 주세요</string>
     <string name="find_modify_pwd_btn">비밀번호 재설정</string>
     <string name="find_re_email_btn">코드 재발송</string>
-    <string name="main_sub1_info_text">그룹 입장을 위한\n코드를 입력해주세요</string>
-    <string name="main_sub1_input">코 드 입 력</string>
-    <string name="main_sub1_btn">입장하기</string>
+    <string name="main_sub1_info_text">00000 ~ 99999사이의 \n 숫자를 입력해 주세요</string>
+    <string name="main_sub1_input">00000 ~ 99999</string>
+    <string name="main_sub1_btn">코드입력</string>
     <string name="main_sub1_wrong_code_dialog">아쉽게도 꽝입니다. 다른 코드를 입력해 주세요</string>
+    <string name="worng_code_input">잘못된 코드입니다. \n 00000 ~ 99999사이의 숫자를 입력해 주세요</string>
     <string name="main_sub1_dupli_code">이미 추가된 그룹의 코드입니다.</string>
     <string name="main_sub2_gr_create">+ 새로운 그룹 추가하기</string>
     <string name="main_sub2_gr_create_dialog_title">추가할 그룹의 이름을 설정해주세요</string>
@@ -42,4 +43,5 @@
     <string name="upload_dialog_text">업로드할 파일의 형식을 선택해주세요</string>
     <string name="show_schedule">모두의 시간표</string>
     <string name="main_sub1_selected_code">이미 당첨된 경품입니다.</string>
+    <string name="random_input">랜덤입력</string>
 </resources>
