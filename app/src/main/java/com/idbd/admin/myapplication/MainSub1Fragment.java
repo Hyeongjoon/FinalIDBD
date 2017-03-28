@@ -26,6 +26,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -100,11 +101,21 @@ public class MainSub1Fragment extends Fragment{
                     makeNotCancleDialog(getString(R.string.won_prize));
                 } else if(result.get("content").equals("non")){
                     pDialog.cancel();
-                    makeDialog(getString(R.string.main_sub1_wrong_code_dialog));
+                    String content= getString(R.string.main_sub1_wrong_code_dialog) +"\n" +"남은 list" + "\n";
+                    JSONArray temp = result.getJSONArray("list");
+                    for(int i = 0 ; i < temp.length() ; i++){
+                        content = content + temp.getJSONObject(i).getString("pname") +"\n";
+                    }
+                    makeDialog(content);
                         //코드가 틀린코드를 입력했을때
                 } else if(result.get("content").equals("selected")){
                     pDialog.cancel();
-                    makeDialog(getString(R.string.main_sub1_selected_code));
+                    String content= getString(R.string.main_sub1_selected_code) +"\n" +"남은 list" + "\n";
+                    JSONArray temp = result.getJSONArray("list");
+                    for(int i = 0 ; i < temp.length() ; i++){
+                        content = content + temp.getJSONObject(i).getString("pname") +"\n";
+                    }
+                    makeDialog(content);
                 } else if(result.get("content").equals("server")){
                     pDialog.cancel();
                     makeDialog(getString(R.string.server_wrong));

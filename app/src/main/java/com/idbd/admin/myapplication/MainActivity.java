@@ -27,11 +27,12 @@ import org.w3c.dom.Text;
 @EActivity
 public class MainActivity extends AppCompatActivity  {
 
-    private int NUM_PAGES = 2;		// 최대 페이지의 수
+    private int NUM_PAGES = 3;		// 최대 페이지의 수
 
     /* Fragment numbering */
     public final static int FRAGMENT_PAGE1 = 1;
     public final static int FRAGMENT_PAGE2 = 0;
+    public final static int FRAGMENT_PAGE3 = 2;
 
 
 
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity  {
                     } case FRAGMENT_PAGE2 :{
                         getSupportActionBar().setSubtitle("");
                         break;
+                    } case FRAGMENT_PAGE3 :{
+                        getSupportActionBar().setSubtitle("");
+                        break;
                     }
                 }
             }
@@ -88,6 +92,7 @@ public class MainActivity extends AppCompatActivity  {
     private class pagerAdapter extends FragmentPagerAdapter{
         MainSub1Fragment_ mainSub1Fragment;
         MainSub2Fragment mainSub2Fragment;
+        MainSub3Fragment mainSub3Fragment;
         public pagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -96,17 +101,23 @@ public class MainActivity extends AppCompatActivity  {
         @Override               // 특정 위치에 있는 Fragment를 반환해준다.
         public Fragment getItem(int position) {
             switch(position){
-                case 1:{
+                case FRAGMENT_PAGE1 :{
                     if(mainSub1Fragment==null){
                         mainSub1Fragment = new MainSub1Fragment_();
                     }
                     return mainSub1Fragment;
                 }
-                case 0: {
+                case FRAGMENT_PAGE2 : {
                     if(mainSub2Fragment==null){
                         mainSub2Fragment = new MainSub2Fragment_();
                     }
                     return mainSub2Fragment;
+                }
+                case FRAGMENT_PAGE3 : {
+                    if(mainSub3Fragment==null){
+                        mainSub3Fragment = new MainSub3Fragment_();
+                    }
+                    return mainSub3Fragment;
                 }
                 default:
                     return null;
