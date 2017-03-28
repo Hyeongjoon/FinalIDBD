@@ -6,8 +6,6 @@
     android:minSdkVersion="8"
     >
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +18,9 @@
         <activity android:name="com.idbd.admin.myapplication.FindEmailActivity_"/>
         <activity android:name="com.idbd.admin.myapplication.ModifyPwdActivity_"/>
         <activity android:name="com.idbd.admin.myapplication.SaveActivity_"/>
-        <activity android:name="com.idbd.admin.myapplication.MainActivity_"/>
+        <activity android:name="com.idbd.admin.myapplication.MainActivity_"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity android:name="com.idbd.admin.myapplication.IntroActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
