@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    >
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:fadeScrollbars="true"
+    android:background="@color/white"
+    android:scrollbarThumbVertical="@color/transparent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/random_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/chat_send_selector"
+            android:textColor="@color/white"
+            android:typeface="monospace"
+            android:textSize="14dp"
+            android:text="@string/random_input"
+            android:layout_gravity="center"
+            android:layout_marginTop="530dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="70dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +30,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:orientation="vertical"
-        android:background="@drawable/background_white">
+        android:background="@color/white">
     <ImageView
         android:clickable="false"
         android:id="@+id/asd"
@@ -28,53 +43,45 @@
 
     <TextView
         android:textSize="12dp"
+        android:layout_marginTop="70dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:text="@string/main_sub1_info_text"
-        android:textColor="@color/text_black"/>
+        android:textColor="@color/btn_gray"/>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:gravity="center"
         >
     <EditText
         android:id="@+id/main_sub1_input"
         android:maxLength="5"
-        android:layout_width="214dp"
-        android:layout_height="35dp"
-        android:hint="@string/main_sub1_input"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:inputType="number"
         android:background="@drawable/edittext_outline2"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="42dp"
-        android:layout_gravity="center_horizontal"
-        android:textCursorDrawable="@color/high_blue"/>
-        <Button
-            android:id="@+id/random_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/chat_send_selector"
-            android:textColor="@color/white"
-            android:typeface="monospace"
-            android:textSize="14dp"
-            android:text="@string/random_input"
-            />
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textCursorDrawable="@color/week_black"
+        android:textSize="30dp"
+        android:textColor="@color/text_black"/>
+        </LinearLayout>
     <Button
         android:id="@+id/addCode"
         android:layout_gravity="center"
         android:layout_width="127dp"
         android:layout_height="37dp"
         android:text="@string/main_sub1_btn"
-        android:layout_marginTop="57dp"
-        android:background="@drawable/chat_send_selector"
-        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/chat_send_selector2"
+        android:textColor="@color/week_black"
         android:typeface="monospace"
         android:textSize="14dp" />
     </LinearLayout>
+    </RelativeLayout>
 </ScrollView>
-</LinearLayout>
