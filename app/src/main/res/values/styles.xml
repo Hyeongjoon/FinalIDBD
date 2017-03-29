@@ -6,7 +6,7 @@
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="titleTextStyle">@style/MyTitleTextStyle</item>
-        <item name="background">@color/white</item>
+        <item name="background">@color/actionbar_back</item>
         <item name="android:subtitleTextStyle">@style/MySubTitleText</item>
         <item name="logo">@drawable/actionbar_logo_blue</item>
         <item name="displayOptions">useLogo|showHome</item>

@@ -44,4 +44,5 @@
     <string name="show_schedule">모두의 시간표</string>
     <string name="main_sub1_selected_code">이미 당첨된 경품입니다.</string>
     <string name="random_input">럭키</string>
+    <string name="layout3_left_item">남은 아이템</string>
 </resources>

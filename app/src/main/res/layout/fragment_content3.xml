@@ -6,11 +6,11 @@
     android:background="@color/white"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:paddingBottom="20dp">
+    android:paddingBottom="@dimen/main_padding_bottom">
    <TextView
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text=" how many item left? "
+       android:text="@string/layout3_left_item"
        android:textSize="20dp"
        android:textColor="@color/low_blue"
        android:layout_marginBottom="20dp"

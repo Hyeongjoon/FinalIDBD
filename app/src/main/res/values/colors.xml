@@ -27,5 +27,6 @@
     <color name="week_gray">#1AA8CECB</color>
     <color name="week_black">#585858</color>
     <color name="btn_gray">#A4A4A4</color>
-
+    <color name="actionbar_back">#40A8CECB</color>
+    <color name="lucky_btn_boder">#E4E3E3</color>
 </resources>

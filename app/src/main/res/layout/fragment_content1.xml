@@ -6,6 +6,7 @@
     android:background="@color/white"
     android:scrollbarThumbVertical="@color/transparent"
     android:fillViewport="true"
+    android:paddingBottom="@dimen/main_padding_bottom"
     >
     <RelativeLayout
         android:layout_width="match_parent"

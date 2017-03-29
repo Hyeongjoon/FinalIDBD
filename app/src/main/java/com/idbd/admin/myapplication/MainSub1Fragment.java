@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import com.idbd.admin.myapplication.Helper.Post;
 import com.idbd.admin.myapplication.Helper.TokenInfo;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -49,6 +52,22 @@ public class MainSub1Fragment extends Fragment{
 
     @ViewById(R.id.main_sub1_input)
     EditText codeInput;
+
+    @AfterViews
+    public void init(){
+        codeInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    addCodeBtn();
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+    }
 
     @Click(R.id.addCode)
     public void addCodeBtn(){

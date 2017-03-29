@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:scrollbarThumbVertical="@color/transparent"
+    android:paddingBottom="@dimen/main_padding_bottom"
     >
    <ImageView
        android:layout_width="match_parent"

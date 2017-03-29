@@ -3,7 +3,7 @@ package com.idbd.admin.myapplication;
 
 
 import android.graphics.Typeface;
-import android.media.tv.TvContract;
+
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +23,8 @@ import com.idbd.admin.myapplication.Helper.ZoomOutPageTransformer;
 import org.androidannotations.annotations.EActivity;
 import org.w3c.dom.Text;
 
+import me.relex.circleindicator.CircleIndicator;
+
 
 @EActivity
 public class MainActivity extends AppCompatActivity  {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity  {
 
     ViewPager mViewPager;			// View pager를 지칭할 변수
     private pagerAdapter pagerAdapter;
+    CircleIndicator indicator;
 
 
     @Override
@@ -48,9 +51,15 @@ public class MainActivity extends AppCompatActivity  {
         mViewPager = (ViewPager)findViewById(R.id.pager);
         pagerAdapter = new pagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(pagerAdapter);
+
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mViewPager.setCurrentItem(FRAGMENT_PAGE2);
+        indicator = (CircleIndicator)findViewById(R.id.indicator);
+
+        indicator.setViewPager(mViewPager);
+
         getSupportActionBar().setElevation(0);
+        indicator.bringToFront();
         mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
 
             @Override
@@ -80,7 +89,6 @@ public class MainActivity extends AppCompatActivity  {
                 // TODO Auto-generated method stub
             }
         });
-
     }
 
     public Fragment getFragmentItem(int position){

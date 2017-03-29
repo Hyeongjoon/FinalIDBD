@@ -67,7 +67,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         // Check if message contains a notification payload.
 
         if (remoteMessage.getNotification() != null) {
-            Log.d("msg", "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            sendPushNotification(remoteMessage);
         }
 
 
@@ -87,8 +87,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher).setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
-                .setContentTitle(remoteMessage.getData().get("title"))
-                .setContentText(remoteMessage.getData().get("text"))
+                .setContentTitle(remoteMessage.getNotification().getTitle())
+                .setContentText(remoteMessage.getNotification().getBody())
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri).setLights(000000255,500,2000)
                 .setContentIntent(pendingIntent);
@@ -96,35 +96,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-    }
-
-    private void insertMessage(Context context , RemoteMessage remoteMessage){
-        mDbHelper = new DBHelper(context , 1);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(DBHelper.GR_ID, remoteMessage.getData().get("gid"));
-        values.put(DBHelper.WRITER, remoteMessage.getData().get("writer"));
-        values.put("content" , remoteMessage.getData().get("text"));
-        db.insert(DBHelper.CHAT_LIST, null, values);
-    }
-
-
-    private void add_num( String temp , String gid){
-                final RequestBody formBody = new FormBody.Builder().add("gid" , gid).build();
-                String idToken = temp;
-                if(idToken==null) {
-                    idToken = FirebaseInstanceId.getInstance().getToken();
-                }
-                final String finalIdToken = idToken;
-                new Thread(){
-                        @Override
-                        public void run() {
-                            try {
-                                Post.post(add_new_num + finalIdToken, formBody);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
     }
 }
