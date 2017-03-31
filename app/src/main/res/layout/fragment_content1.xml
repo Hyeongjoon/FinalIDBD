@@ -63,7 +63,7 @@
         >
     <EditText
         android:id="@+id/main_sub1_input"
-        android:maxLength="5"
+        android:maxLength="3"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:inputType="number"

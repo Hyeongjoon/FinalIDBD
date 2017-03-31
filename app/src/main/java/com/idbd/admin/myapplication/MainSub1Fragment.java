@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -94,7 +95,7 @@ public class MainSub1Fragment extends Fragment{
         } else{
             String code = codeInput.getText().toString().trim();
             codeInput.setText("");
-            if(code.length()!=5){
+            if(code.length()!=3){
                 makeDialog(getString(R.string.worng_code_input));
             } else{
                 pDialog = ProgressDialog.show(getActivity(), "확인중입니다....", "Please wait", true, false);
@@ -102,6 +103,8 @@ public class MainSub1Fragment extends Fragment{
             }
         }
     }
+
+
 
     @Click(R.id.random_btn)
     public void randomInput(){
@@ -120,12 +123,12 @@ public class MainSub1Fragment extends Fragment{
                     makeNotCancleDialog(getString(R.string.won_prize));
                 } else if(result.get("content").equals("non")){
                     pDialog.cancel();
-                    String content= getString(R.string.main_sub1_wrong_code_dialog) +"\n" +"남은 list" + "\n";
+                    String content = "";
                     JSONArray temp = result.getJSONArray("list");
                     for(int i = 0 ; i < temp.length() ; i++){
                         content = content + temp.getJSONObject(i).getString("pname") +"\n";
                     }
-                    makeDialog(content);
+                    makeResultDialog(content);
                         //코드가 틀린코드를 입력했을때
                 } else if(result.get("content").equals("selected")){
                     pDialog.cancel();
@@ -144,6 +147,23 @@ public class MainSub1Fragment extends Fragment{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @UiThread
+    public void makeResultDialog(String content){
+        final LayoutInflater inflater= getActivity().getLayoutInflater();
+        final View dialogView= inflater.inflate(R.layout.upload_dialog, null);
+        final AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+        TextView list = (TextView)dialogView.findViewById(R.id.dialog_item_list);
+        builder.setView(dialogView);
+        list.setText(content);
+        builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 
     @UiThread

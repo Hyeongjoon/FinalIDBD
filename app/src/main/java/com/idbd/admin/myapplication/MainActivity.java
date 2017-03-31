@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.idbd.admin.myapplication.Helper.BackPressCloseHandler;
 import com.idbd.admin.myapplication.Helper.ZoomOutPageTransformer;
 
 
@@ -41,12 +42,17 @@ public class MainActivity extends AppCompatActivity  {
     ViewPager mViewPager;			// View pager를 지칭할 변수
     private pagerAdapter pagerAdapter;
     CircleIndicator indicator;
+    private BackPressCloseHandler backPressCloseHandler;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
+
         // ViewPager를 검색하고 Adapter를 달아주고, 첫 페이지를 선정해준다.
         mViewPager = (ViewPager)findViewById(R.id.pager);
         pagerAdapter = new pagerAdapter(getSupportFragmentManager());
@@ -90,6 +96,12 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
+        };
 
     public Fragment getFragmentItem(int position){
             return pagerAdapter.getItem(position);

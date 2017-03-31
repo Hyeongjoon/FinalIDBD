@@ -58,6 +58,7 @@ public class MainSub2Fragment extends Fragment {
         }
     }
 
+
     @UiThread
     public void setImageView(String url){
         Glide.with(getActivity()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
