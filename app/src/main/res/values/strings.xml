@@ -24,7 +24,7 @@
     <string name="main_sub1_input">00000 ~ 99999</string>
     <string name="main_sub1_btn">코드입력</string>
     <string name="main_sub1_wrong_code_dialog">retry</string>
-    <string name="worng_code_input">잘못된 코드입니다. \n세자리 숫자를 입력해 주세요</string>
+    <string name="worng_code_input">잘못된 코드입니다. \n네자리 숫자를 입력해 주세요</string>
     <string name="main_sub1_dupli_code">이미 추가된 그룹의 코드입니다.</string>
     <string name="main_sub2_gr_create">+ 새로운 그룹 추가하기</string>
     <string name="main_sub2_gr_create_dialog_title">추가할 그룹의 이름을 설정해주세요</string>

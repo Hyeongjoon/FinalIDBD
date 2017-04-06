@@ -42,15 +42,13 @@ public class LoginActivity extends Activity{
 
     private FirebaseAuth mAuth;
 
-    boolean goMain = true;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         // your custom code
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
+
     @AfterViews
     protected void init() {
         mAuth = FirebaseAuth.getInstance();
@@ -115,7 +113,6 @@ public class LoginActivity extends Activity{
             String result = jsonObject.get("result").toString();
             if(result.equals("success")){
                 String mCustomToken = jsonObject.get("content").toString();
-                goMain = jsonObject.getBoolean("goMain");
                 mAuth.signInWithCustomToken(mCustomToken)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                  @Override

@@ -10,7 +10,7 @@ public class MakeRandomNum {
     public static String makeNum(){
         Random generator = new Random();
         String temp = "";
-        for(int i = 0 ; i < 3 ; i++){
+        for(int i = 0 ; i < 4 ; i++){
             temp = temp + generator.nextInt(10);
         }
         return temp;

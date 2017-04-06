@@ -95,7 +95,7 @@ public class MainSub1Fragment extends Fragment{
         } else{
             String code = codeInput.getText().toString().trim();
             codeInput.setText("");
-            if(code.length()!=3){
+            if(code.length()!=4){
                 makeDialog(getString(R.string.worng_code_input));
             } else{
                 pDialog = ProgressDialog.show(getActivity(), "확인중입니다....", "Please wait", true, false);
