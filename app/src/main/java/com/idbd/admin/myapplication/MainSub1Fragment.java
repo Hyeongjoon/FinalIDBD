@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,27 +73,11 @@ public class MainSub1Fragment extends Fragment{
 
     @Click(R.id.addCode)
     public void addCodeBtn(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        /*
+
         if (user == null) {
-            builder.setCancelable(true)
-                    .setTitle(R.string.dialog_title)
-                    .setMessage("코드입력을 하려면 로그인이 필요합니다\n로그인 하시겠습니까?")
-                    .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            LoginActivity_.intent(getActivity()).start();
-                            getActivity().finish();
-                        }
-                    })
-                    .setNegativeButton(R.string.dialog_cancle, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                        }
-                    });
-            builder.show();
-        } else{
+            */
+        //} else{
             String code = codeInput.getText().toString().trim();
             codeInput.setText("");
             if(code.length()!=4){
@@ -101,7 +86,7 @@ public class MainSub1Fragment extends Fragment{
                 pDialog = ProgressDialog.show(getActivity(), "확인중입니다....", "Please wait", true, false);
                 addCode(code);
             }
-        }
+      // }
     }
 
 
@@ -117,7 +102,12 @@ public class MainSub1Fragment extends Fragment{
                 .add("code" , code)
                 .build();
         try {
-                JSONObject result =  new JSONObject(Post.post(confirm + TokenInfo.getTokenId(),formBody));
+                String tokenId = "asd";
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user!=null){
+                    tokenId = TokenInfo.getTokenId();
+                }
+                JSONObject result =  new JSONObject(Post.post(confirm +tokenId ,formBody));
                 if(result.get("result").equals("true")){
                     pDialog.cancel();
                     makeNotCancleDialog(getString(R.string.won_prize));
@@ -126,7 +116,7 @@ public class MainSub1Fragment extends Fragment{
                     String content = "";
                     JSONArray temp = result.getJSONArray("list");
                     for(int i = 0 ; i < temp.length() ; i++){
-                        content = content + temp.getJSONObject(i).getString("pname") +"\n";
+                        content = content +temp.getJSONObject(i).getString("pname") +"\n";
                     }
                     makeResultDialog(content);
                         //코드가 틀린코드를 입력했을때
@@ -138,6 +128,9 @@ public class MainSub1Fragment extends Fragment{
                         content = content + temp.getJSONObject(i).getString("pname") +"\n";
                     }
                     makeDialog(content);
+                } else if(result.get("content").equals("won")){
+                    pDialog.cancel();
+                    makeDialogLogin();
                 } else if(result.get("content").equals("server")){
                     pDialog.cancel();
                     makeDialog(getString(R.string.server_wrong));
@@ -163,6 +156,27 @@ public class MainSub1Fragment extends Fragment{
                 dialog.cancel();
             }
         });
+        builder.show();
+    }
+
+    @UiThread
+    public void makeDialogLogin(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(true)
+                .setTitle("당 첨")
+                .setMessage(getString(R.string.login_dialog))
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        LoginActivity_.intent(getActivity()).start();
+                    }
+                })
+                .setNegativeButton(R.string.dialog_cancle, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
         builder.show();
     }
 

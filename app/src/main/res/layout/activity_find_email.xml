@@ -40,6 +40,7 @@
         android:paddingLeft="10dp"
         android:layout_marginTop="30dp"
         android:inputType="textEmailAddress"
+        android:textCursorDrawable="@drawable/color_cursor"
         android:layout_gravity="center_horizontal"
         android:textColorHint="@color/white_trans50"/>
 

@@ -33,7 +33,9 @@
         android:paddingLeft="10dp"
         android:layout_marginTop="100dp"
         android:layout_gravity="center_horizontal"
-        android:textColorHint="@color/white_trans50"/>
+        android:textColorHint="@color/white_trans50"
+        android:textCursorDrawable="@drawable/color_cursor"
+        />
 
     <EditText
         android:id="@+id/login_pwd"
@@ -45,7 +47,9 @@
         android:paddingLeft="10dp"
         android:layout_marginTop="7dp"
         android:layout_gravity="center_horizontal"
-        android:textColorHint="@color/white_trans50"/>
+        android:textColorHint="@color/white_trans50"
+        android:textCursorDrawable="@drawable/color_cursor"
+        />
 
     <Button
         android:id="@+id/login_login_btn"
@@ -71,7 +75,13 @@
         android:typeface="monospace"
         android:textSize="14dp"
         />
-
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="127dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="7dp"
+        android:layout_gravity="center_horizontal"
+        />
 
     <TextView
         android:id="@+id/login_find_pwd"
@@ -79,7 +89,7 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="28dp"
         android:text="@string/login_find_pwd"
         android:textColor="@color/white_trans80" />
 </LinearLayout>
