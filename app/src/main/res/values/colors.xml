@@ -29,4 +29,11 @@
     <color name="btn_gray">#A4A4A4</color>
     <color name="actionbar_back">#40A8CECB</color>
     <color name="lucky_btn_boder">#E4E3E3</color>
+
+    <color name="pushed_pink">#a60015</color>
+    <color name="pink">#ee596c</color>
+    <color name="week_pink">#1Aee596c</color>
+    <color name="salsek">#e5dcdd</color>
+    <color name="blacky">#433d3f</color>
+    <color name="transblacky">#1A433d3f</color>
 </resources>

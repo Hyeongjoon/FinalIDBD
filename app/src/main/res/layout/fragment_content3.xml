@@ -6,22 +6,47 @@
     android:background="@color/white"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:paddingBottom="@dimen/main_padding_bottom">
+    android:paddingBottom="20dp">
    <TextView
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:text="@string/layout3_left_item"
        android:textSize="20dp"
-       android:textColor="@color/low_blue"
+       android:textColor="@color/pink"
        android:layout_marginBottom="20dp"
        android:layout_marginTop="20dp"
        android:gravity="center" />
    <android.support.v7.widget.RecyclerView
        android:id="@+id/recycler_view"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="150dp"
        android:layout_gravity="center"
        android:background="@drawable/chat_edittext"
        >
    </android.support.v7.widget.RecyclerView>
+   <LinearLayout
+       android:id="@+id/main_sub3_linear_btn"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:layout_marginTop="20dp">
+      <Button
+          android:id="@+id/main_sub3_service"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:gravity="center"
+          android:background="@drawable/setting_selector"
+          android:text="서비스 이용약관"
+          android:layout_marginTop="20dp"
+          android:textColor="@color/blacky"/>
+      <Button
+          android:id="@+id/main_sub3_individual"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:gravity="center"
+          android:background="@drawable/setting_selector"
+          android:text="개인정보 이용약관"
+          android:layout_marginTop="20dp"
+          android:textColor="@color/blacky"/>
+   </LinearLayout>
 </LinearLayout>

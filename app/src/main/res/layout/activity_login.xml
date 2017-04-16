@@ -32,6 +32,7 @@
         android:background="@drawable/edittext_outline1"
         android:paddingLeft="10dp"
         android:layout_marginTop="100dp"
+        android:textColor="@color/pink"
         android:layout_gravity="center_horizontal"
         android:textColorHint="@color/white_trans50"
         android:textCursorDrawable="@drawable/color_cursor"
@@ -49,6 +50,7 @@
         android:layout_gravity="center_horizontal"
         android:textColorHint="@color/white_trans50"
         android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/pink"
         />
 
     <Button
@@ -59,7 +61,7 @@
         android:text="@string/login_btn"
         android:layout_marginTop="57dp"
         android:background="@drawable/button_outline1"
-        android:textColor="@color/text_black"
+        android:textColor="@color/pink"
         android:typeface="monospace"
         android:textSize="14dp" />
 
@@ -70,8 +72,8 @@
         android:layout_height="37dp"
         android:text="@string/sign_up_btn"
         android:layout_marginTop="7dp"
-        android:background="@drawable/button_outline2"
-        android:textColor="@color/white_trans80"
+        android:background="@drawable/chat_send_selector2"
+        android:textColor="@color/white"
         android:typeface="monospace"
         android:textSize="14dp"
         />

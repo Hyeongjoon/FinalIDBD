@@ -1,6 +1,7 @@
 package com.idbd.admin.myapplication.Helper;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -38,5 +39,17 @@ public class TokenInfo extends FirebaseInstanceIdService {
     public static String getUserName(){
         return userName;
     }
+
+    @Override
+    public void onTokenRefresh() {
+        // Get updated InstanceID token.
+        if(FirebaseAuth.getInstance()!=null){
+            FirebaseAuth.getInstance().signOut();
+        };
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
+    }
+
 
 }

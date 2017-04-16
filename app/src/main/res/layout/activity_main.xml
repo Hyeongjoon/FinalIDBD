@@ -11,12 +11,12 @@
             android:layout_alignParentBottom="true"
             android:id="@+id/indicator"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="20dp"
             app:ci_animator_reverse="@animator/indicator_animator_reverse"
             app:ci_drawable="@drawable/black_radius_square"
-            app:ci_height="2dp"
+            app:ci_height="4dp"
             app:ci_margin="6dp"
-            app:ci_width="10dp"
+            app:ci_width="4dp"
             />
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"

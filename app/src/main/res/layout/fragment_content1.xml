@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:scrollbarThumbVertical="@color/transparent"
     android:fillViewport="true"
-    android:paddingBottom="@dimen/main_padding_bottom"
+    android:paddingBottom="20dp"
     >
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,10 +20,8 @@
             android:typeface="monospace"
             android:textSize="14dp"
             android:text="@string/random_input"
-            android:layout_gravity="center"
-            android:layout_marginTop="530dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="140dp"
             android:layout_marginRight="70dp" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,11 +40,11 @@
         android:background="@drawable/logo_color"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:textSize="12dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
@@ -70,19 +68,19 @@
         android:background="@drawable/edittext_outline2"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textCursorDrawable="@color/week_black"
+        android:textCursorDrawable="@color/pink"
         android:textSize="30dp"
-        android:textColor="@color/text_black"/>
+        android:textColor="@color/pink"/>
         </LinearLayout>
     <Button
         android:id="@+id/addCode"
         android:layout_gravity="center"
-        android:layout_width="127dp"
+        android:layout_width="100dp"
         android:layout_height="37dp"
         android:text="@string/main_sub1_btn"
         android:layout_marginTop="30dp"
         android:background="@drawable/chat_send_selector2"
-        android:textColor="@color/week_black"
+        android:textColor="@color/white"
         android:typeface="monospace"
         android:textSize="14dp" />
     </LinearLayout>

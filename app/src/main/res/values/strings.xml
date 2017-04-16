@@ -6,8 +6,8 @@
     <string name="input_pwd">Password</string>
     <string name="input_pwd_confirm">Password Confirm</string>
     <string name="input_name">사용할 이름을 적어주세요</string>
-    <string name="login_btn">Login</string>
-    <string name="sign_up_btn">Sign Up</string>
+    <string name="login_btn">로그인</string>
+    <string name="sign_up_btn">회원가입</string>
     <string name="login_find_pwd">비밀번호를 잊으셨나요?</string>
     <string name="go_to_login">로그인 화면으로</string>
     <string name="dialog_title">알 림</string>
@@ -20,9 +20,9 @@
     <string name="find_pwd_info">코드가 발송되었습니다. \n Email에서 코드를 확인 후 입력해 주세요</string>
     <string name="find_modify_pwd_btn">비밀번호 재설정</string>
     <string name="find_re_email_btn">코드 재발송</string>
-    <string name="main_sub1_info_text">0000 ~ 9999\n 숫자를 입력해 주세요</string>
+    <string name="main_sub1_info_text">4자리 숫자</string>
     <string name="main_sub1_input">0000 ~ 9999</string>
-    <string name="main_sub1_btn">코드입력</string>
+    <string name="main_sub1_btn">행운을 빌어!</string>
     <string name="main_sub1_wrong_code_dialog">retry</string>
     <string name="worng_code_input">잘못된 코드입니다. \n네자리 숫자를 입력해 주세요</string>
     <string name="main_sub1_dupli_code">이미 추가된 그룹의 코드입니다.</string>
@@ -44,10 +44,11 @@
     <string name="result_dialog_sub_title_text">남아 있는 item 목록</string>
     <string name="show_schedule">모두의 시간표</string>
     <string name="main_sub1_selected_code">이미 당첨된 경품입니다.</string>
-    <string name="random_input">럭키</string>
+    <string name="random_input">랜덤</string>
     <string name="layout3_left_item">남은 아이템</string>
     <string name="login_dialog">당첨되었습니다.\n상품수령을 위해선 로그인이 필요합니다.\n로그인 하시겠습니까?</string>
     <string name="facebook_app_id">1743510485961254</string>
     <string name="fb_email_verify_text">상품수령에 이용할 이메일 입력해주세요</string>
     <string name="fb_email_verify_btn">인증하기</string>
+    <string name="delete_id_dialog_content">정말로 탈퇴하시겠습니까?? ㅠㅠ</string>
 </resources>

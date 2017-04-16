@@ -73,11 +73,6 @@ public class MainSub1Fragment extends Fragment{
 
     @Click(R.id.addCode)
     public void addCodeBtn(){
-        /*
-
-        if (user == null) {
-            */
-        //} else{
             String code = codeInput.getText().toString().trim();
             codeInput.setText("");
             if(code.length()!=4){
@@ -86,7 +81,6 @@ public class MainSub1Fragment extends Fragment{
                 pDialog = ProgressDialog.show(getActivity(), "확인중입니다....", "Please wait", true, false);
                 addCode(code);
             }
-      // }
     }
 
 

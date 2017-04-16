@@ -3,7 +3,7 @@
     android:shape="rectangle" >
     <stroke
         android:width="1px"
-        android:color="@color/white_trans20"/>
+        android:color="@color/white_trans80"/>
     <solid
-        android:color="@color/white_trans20"/> // 배경 색상
+        android:color="@color/white_trans80"/> // 배경 색상
 </shape>
