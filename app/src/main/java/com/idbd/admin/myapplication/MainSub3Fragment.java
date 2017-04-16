@@ -54,7 +54,7 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 public class MainSub3Fragment extends Fragment{
 
     private String getList = "http://52.78.18.19/getList/";
-    private String delete_id = "http://52.78.18.19/delete";
+    private String delete_id_url = "http://52.78.18.19/delete/";
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -82,6 +82,7 @@ public class MainSub3Fragment extends Fragment{
                 @Override
                 public void onClick(View v) {
                     FirebaseAuth.getInstance().signOut();
+                    TokenInfo.setTokenId(null);
                     MainActivity_.intent(getActivity()).flags(FLAG_ACTIVITY_CLEAR_TOP).start();
                     getActivity().finish();
                 }
@@ -138,13 +139,6 @@ public class MainSub3Fragment extends Fragment{
         }
     }
 
-    /*@Click(R.id.main_sub3_sign_out)
-    public void sign_out(){
-        if(FirebaseAuth.getInstance().getCurrentUser()==null){
-            makeDialog("현재 로그인상태가 아닙니다.");
-        }
-    }*/
-
     @UiThread
     public void swap(){
         mRecyclerView.swapAdapter(mAdapter , false);
@@ -156,6 +150,13 @@ public class MainSub3Fragment extends Fragment{
     }
 
     @UiThread
+    public void canclePdialog(){
+        if(pDialog!=null){
+            pDialog.cancel();
+        }
+    }
+
+    @UiThread
     public void makeDeleteDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true)
@@ -164,7 +165,7 @@ public class MainSub3Fragment extends Fragment{
                 .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseAuth.getInstance().signOut();
+                        delete_id();
                         ProgressDialog.show(getActivity(), "확인중입니다....", "Please wait", true, false);
                     }
                 })
@@ -177,8 +178,33 @@ public class MainSub3Fragment extends Fragment{
         builder.show();
     }
 
+    @UiThread
+    public void goMainActivity(){
+        FirebaseAuth.getInstance().signOut();
+        TokenInfo.setTokenId(null);
+        MainActivity_.intent(getActivity()).flags(FLAG_ACTIVITY_CLEAR_TOP).start();
+        getActivity().finish();
+    }
+
     @Background
     public void delete_id(){
-
+        RequestBody formBody = new FormBody.Builder()
+                .build();
+        try {
+            JSONObject jsonObject = new JSONObject(Post.post(delete_id_url+TokenInfo.getTokenId(), formBody));
+            if(jsonObject.getString("result").equals("true")){
+                canclePdialog();
+                goMainActivity();
+            } else{
+                canclePdialog();
+                makeDialog("내부 서버오류입니다. 잠시후에 시도해주세요");
+            }
+        } catch (JSONException e) {
+            canclePdialog();
+            makeDialog("내부 서버오류입니다. 잠시후에 시도해주세요");
+        } catch (IOException e) {
+            canclePdialog();
+            makeDialog("내부 서버오류입니다. 잠시후에 시도해주세요");
+        }
     }
 }
