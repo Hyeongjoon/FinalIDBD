@@ -16,6 +16,7 @@ import com.idbd.admin.myapplication.Helper.Post;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -36,8 +37,11 @@ public class MainSub2Fragment extends Fragment {
 
     private String init_url = "http://52.78.18.19/main";
 
-    @ViewById(R.id.main_image)
-    ImageView imageView;
+    @ViewById(R.id.main_image1)
+    ImageView imageView1;
+
+    @ViewById(R.id.main_image2)
+    ImageView imageView2;
 
     @AfterViews
     public void init(){
@@ -46,21 +50,17 @@ public class MainSub2Fragment extends Fragment {
 
     @Background
     public void getImage(){
-        RequestBody formBody = new FormBody.Builder()
-                .build();
-        try {
-            JSONObject jsonObject = new JSONObject(Post.post(init_url, formBody));
-            setImageView(jsonObject.getString("url"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
+        setImageView("https://s3.ap-northeast-2.amazonaws.com/sendwitchtracer/mainImage/1.png" , imageView1);
+        setImageView("https://s3.ap-northeast-2.amazonaws.com/sendwitchtracer/mainImage/2.png" , imageView2);
     }
 
+    @Click(R.id.go_mining)
+    public void go_mining(){
+        ((MainActivity_) getActivity()).selectPage(1);
+    }
 
     @UiThread
-    public void setImageView(String url){
+    public void setImageView(String url ,ImageView imageView){
         Glide.with(getActivity()).load(url).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
     }
 }

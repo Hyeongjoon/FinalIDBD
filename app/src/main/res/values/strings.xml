@@ -1,7 +1,7 @@
 <resources>
     <string name="server_wrong">내부 서버 오류입니다. 잠시후에 다시 시도해주세요</string>
     <string name="won_prize">축하합니다!! 당첨되었습니다. 메일이 발송되었습니다. 확인해 주세요!!</string>
-    <string name="app_name">IDBD</string>
+    <string name="app_name">idbd</string>
     <string name="input_email">email</string>
     <string name="input_pwd">Password</string>
     <string name="input_pwd_confirm">Password Confirm</string>
@@ -25,24 +25,14 @@
     <string name="main_sub1_btn">행운을 빌어!</string>
     <string name="main_sub1_wrong_code_dialog">retry</string>
     <string name="worng_code_input">잘못된 코드입니다. \n네자리 숫자를 입력해 주세요</string>
-    <string name="main_sub1_dupli_code">이미 추가된 그룹의 코드입니다.</string>
-    <string name="main_sub2_gr_create">+ 새로운 그룹 추가하기</string>
-    <string name="main_sub2_gr_create_dialog_title">추가할 그룹의 이름을 설정해주세요</string>
-    <string name="main_sub2_gr_name_change_dialog_title">변경할 그룹의 이름을 설정해주세요</string>
-    <string name="main_sub2_gr_delete_confirm">정말로 탈퇴 하시겠습니까?</string>
-    <string name="main_sub2_color_change_tilte">변경할 색상을 선택해 주세요</string>
     <string name="main_sub3_first_menu">고객센터 불편사항</string>
     <string name="main_sub3_second_menu">서비스 이용 약관</string>
     <string name="main_sub3_third_menu">비밀번호 변경</string>
     <string name="main_sub3_fourth_menu">로그아웃</string>
     <string name="main_sub3_fifth_menu">계정 탈퇴</string>
-    <string name="correct_sche_success_dialog">스케쥴 수정이 완료되었습니다.</string>
-    <string name="wrong_gr_name_input">그룹이름은 1글자 이상으로 해주세요</string>
-    <string name="download_path">/IDBDApp</string>
     <string name="bucket">sendwitchtracer</string>
     <string name="result_dialog_title_text">Retry</string>
     <string name="result_dialog_sub_title_text">남아 있는 item 목록</string>
-    <string name="show_schedule">모두의 시간표</string>
     <string name="main_sub1_selected_code">이미 당첨된 경품입니다.</string>
     <string name="random_input">랜덤</string>
     <string name="layout3_left_item">남은 아이템</string>

@@ -11,14 +11,14 @@
         android:textAlignment="center"
         android:text="@string/result_dialog_title_text"
         android:textSize="24dp"
-        android:textColor="@color/low_blue"
+        android:textColor="@color/pink"
         android:layout_marginBottom="17dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="@string/result_dialog_sub_title_text"
-        android:textColor="@color/low_blue"
+        android:textColor="@color/pink"
         android:layout_marginBottom="17dp"/>
 
     <TextView

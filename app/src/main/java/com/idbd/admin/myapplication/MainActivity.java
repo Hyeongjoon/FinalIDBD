@@ -151,6 +151,12 @@ public class MainActivity extends AppCompatActivity  {
             return NUM_PAGES;
         }
     }
+
+    public void selectPage(int page) {
+        mViewPager.setCurrentItem(page);
+    }
+
+
 }
 
 

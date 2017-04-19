@@ -2,6 +2,8 @@ package com.idbd.admin.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -77,6 +79,14 @@ public class MainSub3Fragment extends Fragment{
             });
             layout.addView(login);
         } else{
+            Button modify_pwd = makeBtn("비밀번호 변경");
+            modify_pwd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    makeDialog("비밀번호 변경은 웹사이트에서 진행해 주세요\nhttp://idbd.co.kr");
+                }
+            });
+
             Button sign_out = makeBtn("로그아웃");
             sign_out.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,6 +104,7 @@ public class MainSub3Fragment extends Fragment{
                     makeDeleteDialog();
                 }
             });
+            layout.addView(modify_pwd);
             layout.addView(sign_out);
             layout.addView(delete_id);
         }
@@ -206,5 +217,23 @@ public class MainSub3Fragment extends Fragment{
             canclePdialog();
             makeDialog("내부 서버오류입니다. 잠시후에 시도해주세요");
         }
+    }
+
+    @Click(R.id.main_sub3_service)
+    public void service(){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse("http://idbd.co.kr/policy/service"));
+        startActivity(intent);
+    }
+
+    @Click(R.id.main_sub3_individual)
+    public void individual(){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse("http://idbd.co.kr/policy/individual"));
+        startActivity(intent);
     }
 }
