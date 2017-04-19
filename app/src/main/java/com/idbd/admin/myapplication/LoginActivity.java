@@ -4,10 +4,14 @@ import android.app.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -64,6 +68,8 @@ public class LoginActivity extends Activity{
     private LoginButton loginButton;
     private CallbackManager facebookCallbackManager;
 
+    @ViewById(R.id.login_text_view)
+    TextView login_text;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -180,8 +186,15 @@ public class LoginActivity extends Activity{
     @AfterViews
     protected void init() {
         mAuth = FirebaseAuth.getInstance();
+        login_text.setClickable(true);
+        login_text.setMovementMethod(LinkMovementMethod.getInstance());
+        String login = "로그인을 함으로써 idbd의 <a href='http://idbd.co.kr/policy/individual'>개인정보취급방침</a>,"+ "\n"+"<a href='http://idbd.co.kr/policy/service'>서비스 이용약관에</a> 동의 하시게 됩니다.";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            login_text.setText(Html.fromHtml(login, Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            login_text.setText(Html.fromHtml(login));
+        }
     }
-
 
     @ViewById(R.id.login_email)
     EditText emailText;

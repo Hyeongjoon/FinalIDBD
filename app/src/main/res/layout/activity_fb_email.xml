@@ -52,7 +52,7 @@
             android:layout_height="37dp"
             android:text="@string/fb_email_verify_btn"
             android:layout_marginTop="57dp"
-            android:background="@drawable/button_outline1"
+            android:background="@drawable/chat_send_selector"
             android:textColor="@color/pink"
             android:typeface="monospace"
             android:textSize="14dp" />

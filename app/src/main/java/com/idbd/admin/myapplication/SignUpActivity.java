@@ -2,11 +2,17 @@ package com.idbd.admin.myapplication;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.idbd.admin.myapplication.Helper.MakeDialog;
 import com.idbd.admin.myapplication.Helper.Post;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -41,8 +47,32 @@ public class SignUpActivity extends Activity{
     @ViewById(R.id.sign_up_pwd)
     EditText pwdText;
 
+    @ViewById(R.id.sign_up_individual)
+    TextView individual;
+
+    @ViewById(R.id.sign_up_service)
+    TextView service;
+
     @ViewById(R.id.sign_up_pwd_confirm)
     EditText pwd_cofirmText;
+
+
+    @AfterViews
+    public void init(){
+        individual.setClickable(true);
+        individual.setMovementMethod(LinkMovementMethod.getInstance());
+        service.setClickable(true);
+        service.setMovementMethod(LinkMovementMethod.getInstance());
+        String indi_link = "<a href='http://idbd.co.kr/policy/individual'>개인정보 취급 방침 동의</a>";
+        String service_link = "<a href='http://idbd.co.kr/policy/service'>서비스 이용약관 동의</a>";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            individual.setText(Html.fromHtml(indi_link, Html.FROM_HTML_MODE_LEGACY));
+            service.setText(Html.fromHtml(service_link, Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            individual.setText(Html.fromHtml(indi_link));
+            service.setText(Html.fromHtml(service_link));
+        }
+    }
 
     boolean validCheck(){
         String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.+[a-z]+$";

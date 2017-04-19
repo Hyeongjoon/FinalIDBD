@@ -2,7 +2,8 @@
 <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbarThumbVertical="@color/transparent">
   <LinearLayout
       android:orientation="vertical"
       android:layout_width="match_parent"
@@ -25,10 +26,11 @@
           android:hint="@string/input_email"
           android:background="@drawable/edittext_outline1"
           android:paddingLeft="10dp"
-          android:layout_marginTop="75dp"
+          android:layout_marginTop="55dp"
           android:layout_gravity="center_horizontal"
           android:textCursorDrawable="@drawable/color_cursor"
-          android:textColorHint="@color/white_trans50"/>
+          android:textColorHint="@color/white_trans50"
+          android:textColor="@color/pink"/>
 
       <EditText
           android:id="@+id/sign_up_name"
@@ -41,7 +43,8 @@
           android:layout_marginTop="7dp"
           android:textCursorDrawable="@drawable/color_cursor"
           android:layout_gravity="center_horizontal"
-          android:textColorHint="@color/white_trans50"/>
+          android:textColorHint="@color/white_trans50"
+          android:textColor="@color/pink"/>
 
       <EditText
           android:id="@+id/sign_up_pwd"
@@ -54,7 +57,8 @@
           android:textCursorDrawable="@drawable/color_cursor"
           android:layout_marginTop="37dp"
           android:layout_gravity="center_horizontal"
-          android:textColorHint="@color/white_trans50"/>
+          android:textColorHint="@color/white_trans50"
+          android:textColor="@color/pink"/>
 
       <EditText
           android:id="@+id/sign_up_pwd_confirm"
@@ -67,16 +71,46 @@
           android:paddingLeft="10dp"
           android:layout_marginTop="7dp"
           android:layout_gravity="center_horizontal"
-          android:textColorHint="@color/white_trans50"/>
-
+          android:textColorHint="@color/white_trans50"
+          android:textColor="@color/pink"/>
+      <LinearLayout
+          android:paddingTop="10dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center"
+          android:layout_marginTop="10dp">
+          <TextView
+              android:id="@+id/sign_up_individual"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="개인정보 취급 방침 동의"
+              android:textColor="@color/white"/>
+          <CheckBox
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="10dp"
+              android:buttonTint="@color/pink"
+              />
+          <TextView
+              android:id="@+id/sign_up_service"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="서비스 이용약관 동의"
+              android:textColor="@color/white"/>
+          <CheckBox
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:buttonTint="@color/pink"/>
+      </LinearLayout>
       <Button
           android:id="@+id/sign_up_sign_up_btn"
           android:layout_gravity="center"
           android:layout_width="175dp"
           android:layout_height="37dp"
           android:text="@string/sign_up_btn"
-          android:layout_marginTop="37dp"
-          android:background="@drawable/button_outline1"
+          android:layout_marginTop="20dp"
+          android:background="@drawable/chat_send_selector"
           android:textColor="@color/text_black"
           android:typeface="monospace"
           android:textSize="14dp"/>
@@ -87,7 +121,7 @@
           android:layout_height="37dp"
           android:text="@string/go_to_login"
           android:layout_marginTop="7dp"
-          android:background="@drawable/button_outline2"
+          android:background="@drawable/chat_send_selector2"
           android:textColor="@color/white_trans80"
           android:typeface="monospace"
           android:textSize="14dp"/>

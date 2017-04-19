@@ -31,7 +31,7 @@
     <string name="main_sub3_fourth_menu">로그아웃</string>
     <string name="main_sub3_fifth_menu">계정 탈퇴</string>
     <string name="bucket">sendwitchtracer</string>
-    <string name="result_dialog_title_text">Retry</string>
+    <string name="result_dialog_title_text">Fail</string>
     <string name="result_dialog_sub_title_text">남아 있는 item 목록</string>
     <string name="main_sub1_selected_code">이미 당첨된 경품입니다.</string>
     <string name="random_input">랜덤</string>
